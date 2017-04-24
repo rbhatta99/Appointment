@@ -1,3 +1,6 @@
+<?php 
+require "dbconnect.php"
+?>
 <html>
 	<head>
 		<title>Healthcare System</title>
@@ -38,7 +41,7 @@
 		<div class="content_wrapper">
 			<div class="content_main">
 <?php
-	session_start();
+	// session_start();
 	
 	$username=$_SESSION["username"];
 	$fname=$_POST["fName"];
@@ -56,13 +59,13 @@
 			
 	//$conn = pg_connect('host=localhost dbname=healthcare user=postgres password=user'); 
 	
-	$conn=mysql_connect("localhost","root","root")or die("can not connect");
-	mysql_select_db("healthcare",$conn) or die("can not select database");
+	// $conn=mysql_connect("localhost","root","root")or die("can not connect");
+	// mysql_select_db("healthcare",$conn) or die("can not select database");
 	
 	$query = "update patient set patient_lname='$lname', patient_fname='$fname', patient_mname='$mname', patient_sickness='$sickness', patient_age='$age',
 	patient_birthdate='$birthdate', patient_gender='$gender', patient_height='$height', patient_weight='$weight', patient_status='$status', patient_address='$address', patient_contactno='$contactno' where patient_username='$username'";
 				
-	$result = mysql_query($query,$conn); 
+	$result = mysqli_query($conn,$query); 
 	if (!$result) { 
 		echo "Problem with query " . $query . "<br/>"; 
 	//	echo pg_last_error(); 
@@ -72,7 +75,7 @@
 		echo "Your profile information was successfully edited.";
 	}
 	
-	mysql_close($conn);
+	mysqli_close($conn);
 ?>
 </div>
 </div>

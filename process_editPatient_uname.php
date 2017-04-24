@@ -1,3 +1,4 @@
+<?php require "dbconnect.php";?>
 <html>
 	<head>
 		<title>Healthcare System</title>
@@ -38,12 +39,12 @@
 		<div class="content_wrapper">
 			<div class="content_main">
 <?php
-	session_start();
+	// session_start();
 	
 	//$conn = pg_connect('host=localhost dbname=healthcare user=postgres password=user'); 
 	
-	$conn=mysql_connect("localhost","root","root")or die("can not connect");
-	mysql_select_db("healthcare",$conn) or die("can not select database");
+	// $conn=mysqli_connect("localhost","root","root")or die("can not connect");
+	// mysqli_select_db("healthcare",$conn) or die("can not select database");
 	
 	
 	$username=$_SESSION["username"];
@@ -52,9 +53,9 @@
 	$i=0;
 	
 	$checkUname = "select patient_username from patient where patient_username='$newuname'";
-		$resultCheck = mysql_query($checkUname,$conn);
+		$resultCheck = mysqli_query($checkUname,$conn);
 		
-	while($myrow = mysql_fetch_assoc($resultCheck)) {
+	while($myrow = mysqli_fetch_assoc($resultCheck)) {
 			$i=$i+1;
 	}
 	
@@ -66,7 +67,7 @@
 	}
 	else{
 		$query = "update patient set patient_username='$newuname' where patient_username='$olduname'"; 
-		$result = mysql_query($query,$conn); 
+		$result = mysqli_query($query,$conn); 
 				if (!$result) { 
 					echo "Problem with query " . $query . "<br/>"; 
 				//	echo pg_last_error(); 
@@ -77,7 +78,7 @@
 					echo "Username successfully edited." ;
 				}
 	}
-	mysql_close($conn);
+	mysqli_close($conn);
 ?>
 </div>
 </div>

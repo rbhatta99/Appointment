@@ -1,15 +1,16 @@
 <?php
-session_start();
+require "dbconnect.php";
+// session_start();
 	if ($_SESSION['login']==0) header('Location: login_page.php');	
 //$conn = pg_connect('host=localhost dbname=healthcare user=postgres password=user');
-				$conn=mysql_connect("localhost","root","root")or die("can not connect");
-	            mysql_select_db("healthcare",$conn) or die("can not select database");
+				// $conn=mysqli_connect("localhost","root","root")or die("can not connect");
+	            // mysqli_select_db("healthcare",$conn) or die("can not select database");
 				
 				/*Display doctor's name and specialization*/						
 				$doctor_user = $_GET['doctor_user'];				
 				//echo $doctor_user;				
-				$doctor_query = mysql_query("SELECT doctor_lname, doctor_fname, doctor_mname, doctor_specialization FROM doctor WHERE doctor_username='$doctor_user'",$conn);
-				$doctor_result = mysql_fetch_array($doctor_query);
+				$doctor_query = mysqli_query($conn,"SELECT doctor_lname, doctor_fname, doctor_mname, doctor_specialization FROM doctor WHERE doctor_username='$doctor_user'");
+				$doctor_result = mysqli_fetch_array($doctor_query);
 			    //echo '<p>' . $doctor_result[0] . ', ' . $doctor_result[1] . ' ' . $doctor_result[2] .'<br/>(' . $doctor_result[3] . ')</p>';					
 				/*Display selected date and its equivalent day of the week*/
 				$app_date = $_GET['app_date'];		
@@ -17,15 +18,15 @@ session_start();
 				$app_dweek = date('l', strtotime($app_date));
 		//		echo '<p>' . $app_date . ' (' . $app_dweek . ')</p>';					
 				if($app_dweek == "Saturday") {
-					$sched_query = mysql_query("SELECT doctor_sched_sat FROM doctor WHERE doctor_username='$doctor_user'",$conn);
+					$sched_query = mysqli_query($conn,"SELECT doctor_sched_sat FROM doctor WHERE doctor_username='$doctor_user'");
 				}
 				else if($app_dweek == "Sunday") {
-					$sched_query = mysql_query("SELECT doctor_sched_sun FROM doctor WHERE doctor_username='$doctor_user'",$conn);
+					$sched_query = mysqli_query($conn,"SELECT doctor_sched_sun FROM doctor WHERE doctor_username='$doctor_user'");
 				}
 				else {
-					$sched_query = mysql_query("SELECT doctor_sched_wday FROM doctor WHERE doctor_username='$doctor_user'",$conn);
+					$sched_query = mysqli_query($conn,"SELECT doctor_sched_wday FROM doctor WHERE doctor_username='$doctor_user'");
 				}
-				$sched_str = mysql_result($sched_query, 0);
+				$sched_str = mysqli_result($sched_query, 0);
 				$sched_array = explode(",", $sched_str);
 				/*---------------------------------------------------------------- */
 				//Disply array
@@ -36,8 +37,8 @@ session_start();
 				$a=array();				
 				$i=0;
 				/* Query to select Appointment Details */
-				$app_query = mysql_query("SELECT app_doctorusername,app_date,app_time FROM appointment WHERE app_doctorusername='$doctor_user' and app_date='$app_date' ",$conn);
-				while($app_result = mysql_fetch_array($app_query))
+				$app_query = mysqli_query($conn,"SELECT app_doctorusername,app_date,app_time FROM appointment WHERE app_doctorusername='$doctor_user' and app_date='$app_date' ");
+				while($app_result = mysqli_fetch_array($app_query))
 					{
                         //echo $app_result['app_time'];
 						$a[$i]=$app_result['app_time'];
@@ -59,9 +60,9 @@ session_start();
 		//		for($j=0;$j<count($sched_array);$j++)
         //      {echo $sched_array[$j]."\r\n";}		
 /*-------------------------------------------------------------------*/  
-                $doctor_query = mysql_query("SELECT doctor_lname, doctor_fname, doctor_specialization,doctor_hospital
-				FROM doctor WHERE doctor_username='$doctor_user'",$conn);
-				$doctor_result = mysql_fetch_array($doctor_query);
+                $doctor_query = mysqli_query($conn,"SELECT doctor_lname, doctor_fname, doctor_specialization,doctor_hospital
+				FROM doctor WHERE doctor_username='$doctor_user'");
+				$doctor_result = mysqli_fetch_array($doctor_query);
 				echo "<br/><br/><br/>";				
 				echo "Doctor Details";				
 				echo '<p>' .'Name:'. $doctor_result[1] . ' ' . $doctor_result[0] . ' <br/>' ;				
@@ -74,7 +75,7 @@ session_start();
 				}
 				/*Else, display time picker*/
 				
-				mysql_close($conn);	
+				mysqli_close($conn);	
 	
 ?>
 

@@ -13,16 +13,16 @@ require "dbconnect.php";
 			
 			//$conn = pg_connect('host=localhost dbname=healthcare user=postgres password=user'); 
 			
-			// $conn=mysql_connect("localhost","root","root")or die("can not connect");
-	  //       mysql_select_db("healthcare",$conn) or die("can not select database");
+			// $conn=mysqli_connect("localhost","root","root")or die("can not connect");
+	  //       mysqli_select_db("healthcare",$conn) or die("can not select database");
 			
 			$query="select patient_fname, patient_mname, patient_lname, patient_sickness, patient_age, patient_birthdate, patient_gender, patient_height, patient_weight, patient_status, patient_address, patient_contactno from patient where patient_username='{$username}';";
-			$result = mysql_query($conn,$query); 
+			$result = mysqli_query($conn,$query); 
 			
-			$rows = mysql_num_rows($result);
+			$rows = mysqli_num_rows($result);
 			
 			for ($i=0; $i<$rows; $i++){
-				$tuple = mysql_fetch_array($result);
+				$tuple = mysqli_fetch_array($result);
 				$fname=$tuple['patient_fname'];
 				$mname=$tuple['patient_mname'];
 				$lname=$tuple['patient_lname'];
@@ -96,7 +96,7 @@ require "dbconnect.php";
 				</table>
 				<input type='submit' name='submit'/>
 				</form>";
-			mysql_close($conn);
+			mysqli_close($conn);
 		?>
 	</body>
 </html>

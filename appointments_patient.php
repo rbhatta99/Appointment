@@ -53,7 +53,7 @@
 				$username = $_SESSION['username'];
 				$query = "SELECT app_patientname, app_number, app_date, app_time, app_doctorname, app_hospital, app_status FROM appointment WHERE app_patientusername='$username' ORDER BY app_date";
 
-				$result = mysql_query($conn,$query);
+				$result = mysqli_query($conn,$query);
 
 				echo '<table><tr>
 						<tr>
@@ -67,7 +67,7 @@
 						</tr>';
 						
 				$x = 1;
-				while ($row = mysql_fetch_row($result)) {
+				while ($row = mysqli_fetch_row($result)) {
 					echo '<tr>';
 					
 					$count = count($row);
@@ -87,8 +87,8 @@
 							<form action="cancel_apprequest.php" method="post">';
 					
 					/*Get time difference in minutes*/
-					$timestamp_query = mysql_query("SELECT app_date, app_time FROM appointment WHERE app_number='$tableID'",$conn);
-					$timestamp_array = mysql_fetch_array($timestamp_query);
+					$timestamp_query = mysqli_query($conn,"SELECT app_date, app_time FROM appointment WHERE app_number='$tableID'");
+					$timestamp_array = mysqli_fetch_array($timestamp_query);
 					$time_difference = check_time($timestamp_array[0], $timestamp_array[1]);
 					
 					/*If the time_difference is more than 24 hours*/
@@ -105,7 +105,7 @@
 				
 				echo '</table>';
 				
-				mysql_close($conn);
+				mysqli_close($conn);
 			?>
 			<a href="request_patient.php">Request Appointment</a>
 			</div>

@@ -1,6 +1,7 @@
 <?php
+	// require "dbconnect.php";
 	include('notification.php');
-	session_start();
+	// session_start();
 	if ($_SESSION['login']==0)
 		header('Location: index.php');
 	else if($_SESSION['login']==2)
@@ -118,16 +119,16 @@
 		//connecting to database
 		//$conn = pg_connect('host=localhost dbname=healthcare user=postgres password=user');
 		
-		$conn=mysql_connect("localhost","root","root")or die("can not connect");
-	    mysql_select_db("healthcare",$conn) or die("can not select database");
+		// $conn=mysqli_connect("localhost","root","root")or die("can not connect");
+	 //    mysqli_select_db("healthcare",$conn) or die("can not select database");
 		
 		$username=$_SESSION["username"];
-		$resultCheck = mysql_query("select * from patient where patient_username = '".$username."';",$conn);
+		$resultCheck = mysqli_query($conn,"select * from patient where patient_username = '".$username."';");
 
-		$rows = mysql_num_rows($resultCheck);
+		$rows = mysqli_num_rows($resultCheck);
 		
 		for($j=0; $j<$rows; $j++){
-			$tuple = mysql_fetch_array($resultCheck);		 
+			$tuple = mysqli_fetch_array($resultCheck);		 
 			echo 'NAME: ', $tuple['patient_lname'],', ', $tuple['patient_fname'] ,' ', $tuple['patient_mname'], '<br />';	
 			echo 'SICKNESS: ', $tuple['patient_sickness'], '<br />';	
 			echo 'GENDER: ', $tuple['patient_gender'], '<br />';	

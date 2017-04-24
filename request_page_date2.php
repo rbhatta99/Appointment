@@ -1,4 +1,5 @@
 <?php
+require "dbconnect.php";
 session_start();
 if ($_SESSION['login']==0) header('Location: login_page.php');
 include('calender_function2.php');
@@ -58,15 +59,15 @@ else
 			<?php
 			
 			   //	$conn = pg_connect('host=localhost dbname=healthcare user=postgres password=user');
-			    $conn=mysql_connect("localhost","root","root")or die("can not connect");
-	            mysql_select_db("healthcare",$conn) or die("can not select database");
+			   // $conn=mysqli_connect("localhost","root","root")or die("can not connect");
+	           // mysqli_select_db("healthcare",$conn) or die("can not select database");
 				
 				/*Display doctor's name and specialization*/
 				$doctor_user = $_SESSION['docuser'];
 								
-				$doctor_query = mysql_query("SELECT doctor_lname, doctor_fname, doctor_specialization,doctor_hospital
-				                                 FROM doctor WHERE doctor_username='$doctor_user'",$conn);
-				$doctor_result = mysql_fetch_array($doctor_query);
+				$doctor_query = mysqli_query($conn,"SELECT doctor_lname, doctor_fname, doctor_specialization,doctor_hospital
+				                                 FROM doctor WHERE doctor_username='$doctor_user'");
+				$doctor_result = mysqli_fetch_array($doctor_query);
 				echo "<br/><br/><br/>";				
 				echo "Doctor Details";
 				echo '<p>' .'Name:'. $doctor_result[1] . ' ' . $doctor_result[0] . ' <br/>' ;				
@@ -96,7 +97,7 @@ else
 									
 				echo draw_calendar($month,$year);	
 				
-				mysql_close($conn);
+				mysqli_close($conn);
 				
 		
 			?>

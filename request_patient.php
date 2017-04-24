@@ -1,5 +1,7 @@
 <?php
-	session_start();
+	require "dbconnect.php";
+	//session_start();
+
 	if ($_SESSION['login']==0) header('Location: login_page.php');
 ?>
 
@@ -44,12 +46,12 @@
 				
 				//$conn = pg_connect('host=localhost dbname=healthcare user=postgres password=user');
 				
-				$conn=mysql_connect("localhost","root","root")or die("can not connect");
-	            mysql_select_db("healthcare",$conn) or die("can not select database");
+				//$conn=mysqli_connect("localhost","root","root")or die("can not connect");
+	            //mysqli_select_db("healthcare",$conn) or die("can not select database");
 				
 				$query = 'SELECT doctor_username, doctor_lname, doctor_fname, doctor_mname, doctor_specialization FROM doctor ORDER BY doctor_lname';
 
-				$result = mysql_query($query,$conn);
+				$result = mysqli_query($conn,$query);
 				echo '<form action="request_page_date.php" method="post">
 						<table class="table_doctors">
 						<tr>
@@ -59,7 +61,7 @@
 							<th>Request</th>
 						</tr>';
 					
-				while ($row = mysql_fetch_array($result)) {
+				while ($row = mysqli_fetch_array($result)) {
 				
 	
                 /* Testing*/
@@ -114,7 +116,7 @@
 				}
 				echo '</table></form>';
 					
-				mysql_close($conn);
+				mysqli_close($conn);
 			?>
 			<form action="appointments_patient.php" method="post">
 			<input type="submit" value="Cancel" />

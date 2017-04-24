@@ -1,3 +1,6 @@
+<?php 
+require "dbconnect.php"
+?>
 <html>
 <head>
 	<title>Health Care System</title>
@@ -106,20 +109,20 @@
 	
 	//$conn = pg_connect('host=localhost dbname=healthcare user=postgres password=user');
 	
-	$conn=mysql_connect("localhost","root","root")or die("can not connect");
-	mysql_select_db("healthcare",$conn) or die("can not select database");
+	// $conn=mysqli_connect("localhost","root","root")or die("can not connect");
+	// mysqli_select_db("healthcare",$conn) or die("can not select database");
 	
 		
 	$queryCheck1 = "select patient_username from patient where patient_username='{$patient_username}';";
-	$resultCheck1 = mysql_query($queryCheck1,$conn) or die("wrong query");
+	$resultCheck1 = mysqli_query($conn,$queryCheck1) or die("wrong query");
 	
 	$queryCheck2 = "select doctor_username from doctor where doctor_username='{$patient_username}';";
-	$resultCheck2 = mysql_query($queryCheck2,$conn) or die("wrong query");
+	$resultCheck2 = mysqli_query($conn,$queryCheck2) or die("wrong query");
 	
-	while($myrow1 = mysql_fetch_assoc($resultCheck1)) {
+	while($myrow1 = mysqli_fetch_assoc($resultCheck1)) {
 			$a=$a+1;
 	}
-	while($myrow2 = mysql_fetch_assoc($resultCheck2)) {
+	while($myrow2 = mysqli_fetch_assoc($resultCheck2)) {
 			$a=$a+1;
 	}
 	echo $a;
@@ -128,7 +131,7 @@
 			('{$patientid}','{$patient_username}','{$patient_password}','{$patient_eadd}','{$patient_lname}','{$patient_fname}','{$patient_mname}','{$patient_sickness}','{$patient_age}',
 			'{$patient_bdate}','{$patient_gender}','{$patient_height}','{$patient_weight}','{$patient_status}','{$patient_address}','{$patient_contactnum}','{$patient_rstatus}');";		
 		
-				$result = mysql_query($query,$conn); 		
+				$result = mysqli_query($conn,$query); 		
 				if (!$result) { 
 					echo "Problem with query " . $query . "<br/>"; 
 					//echo pg_last_error(); 
@@ -144,7 +147,7 @@
 			echo "Username already exists!";
 		
 	}
-	mysql_close($conn);
+	mysqli_close($conn);
 	
 ?>
 </div>

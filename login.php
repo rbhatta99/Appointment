@@ -49,7 +49,7 @@
 			
 			if($status[0] == "approved"){
 				$_SESSION["login"] = 1;
-				$result = mysqli_query("select patient_fname from patient where patient_username='{$username}'",$conn);
+				$result = mysqli_query($conn,"select patient_fname from patient where patient_username='{$username}'");
 				$name = mysqli_fetch_row($result);
 				$_SESSION["name"] = $name[0];
 				$_SESSION["username"] = $username;
@@ -61,11 +61,11 @@
 				echo "Account still pending";
 			}
 		}else if($d!=0){
-			$result = mysqli_query("select doctor_rstatus from doctor where doctor_username='{$username}'",$conn);
+			$result = mysqli_query($conn,"select doctor_rstatus from doctor where doctor_username='{$username}'");
 			$status = mysqli_fetch_row($result);
 			if($status[0] == "approved"){
 				$_SESSION["login"] = 2;
-				$result = mysqli_query("select doctor_fname from doctor where doctor_username='{$username}'",$conn);
+				$result = mysqli_query($conn,"select doctor_fname from doctor where doctor_username='{$username}'");
 				$name = mysqli_fetch_row($result);
 				$_SESSION["name"] = $name[0];
 				$_SESSION["username"] = $username;
