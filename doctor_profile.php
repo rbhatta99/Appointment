@@ -91,6 +91,10 @@ function editProfileP(){
 					<li><a class="top_menu" href = "appointments_patient.php">Appointment</a></li>
 					<!--li><a class="top_menu" href = "#">Settings</a></li-->
 				</ul>
+				<ul class = "main_menu_right">
+				
+				<li> <a id="logout" class="top_menu_right" href = "logout.php"> Log Out </a> </li>
+			</ul>
 				</div>
 	</div>
 	

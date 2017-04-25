@@ -9,7 +9,7 @@
 				echo"
 				<html>
 				<head>
-					<title>Sign Up - Doctor</title>
+					<title>Sign Up</title>
 					<link rel='stylesheet' type='text/css' href='css/signup_doctor_css.css'/>
 					<link rel='stylesheet' type='text/css' href='css/login_page.css' />
 					
