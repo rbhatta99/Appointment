@@ -83,22 +83,22 @@
 	
 	//$conn = pg_connect('host=localhost dbname=healthcare user=postgres password=user');
 	
-	$conn=mysql_connect("localhost","root","root")or die("can not connect");
-	mysql_select_db("healthcare",$conn) or die("can not select database");
+	$conn=mysqli_connect("localhost","root","root")or die("can not connect");
+	mysqli_select_db("healthcare",$conn) or die("can not select database");
 	
 	$queryCount="select doctor_username from doctor;";
-	$resultCount=mysql_query($queryCount,$conn);
+	$resultCount=mysqli_query($queryCount,$conn);
 	
 	$queryCheck1 = "select doctor_username from doctor where doctor_username='{$doctor_username}';";
-	$resultCheck1 = mysql_query($queryCheck1,$conn);
+	$resultCheck1 = mysqli_query($queryCheck1,$conn);
 	
 	$queryCheck2 = "select patient_username from patient where patient_username='{$doctor_username}';";
-	$resultCheck2 = mysql_query($queryCheck2,$conn);
+	$resultCheck2 = mysqli_query($queryCheck2,$conn);
 	
-	while($myrow1 = mysql_fetch_assoc($resultCheck1)) {
+	while($myrow1 = mysqli_fetch_assoc($resultCheck1)) {
 			$a=$a+1;
 	}
-	while($myrow2 = mysql_fetch_assoc($resultCheck2)) {
+	while($myrow2 = mysqli_fetch_assoc($resultCheck2)) {
 			$a=$a+1;
 	}
 	
@@ -148,7 +148,7 @@
 		$query = "insert into doctor (doctor_username, doctor_password, doctor_email, doctor_lname, doctor_fname, doctor_mname, doctor_specialization, doctor_hospital, contactno, doctor_licenseno, doctor_rstatus, doctor_sched_wday, doctor_sched_sat, doctor_sched_sun) values
 			('{$doctor_username}','{$doctor_password}','{$doctor_eadd}','{$doctor_lname}','{$doctor_fname}','{$doctor_mname}','{$doctor_specialization}','{$doctor_hospital}','{$doctor_cinfo}','{$licenseno}','{$doctor_rstatus}','{$time_array_wday[0]}','{$time_array_sat[0]}','{$time_array_sun[0]}');";
 			 
-		$result = mysql_query($query,$conn); 
+		$result = mysqli_query($query,$conn); 
 				if (!$result) { 
 					echo "Problem with Insertion,try again " . $query . "<br/>"; 
 //					echo pg_last_error(); 
@@ -165,7 +165,7 @@
 			echo "Username already exists.";
 		
 	}
-	mysql_close($conn);	
+	mysqli_close($conn);	
 	
 ?></div>
 </div>

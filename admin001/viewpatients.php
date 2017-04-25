@@ -49,12 +49,12 @@
 				//connecting to database
 			//	$conn = pg_connect('host=localhost dbname=healthcare user=postgres password=user');
                 
-				$conn=mysql_connect("localhost","root","root")or die("can not connect");
-	            mysql_select_db("healthcare",$conn) or die("can not select database");
+				$conn=mysqli_connect("localhost","root","root")or die("can not connect");
+	            mysqli_select_db("healthcare",$conn) or die("can not select database");
 				
-				$resultCheck = mysql_query("select * from patient;",$conn);
+				$resultCheck = mysqli_query("select * from patient;",$conn);
 				
-				$rows = mysql_num_rows($resultCheck);
+				$rows = mysqli_num_rows($resultCheck);
 				
 				echo '<center><h2 style="color:green; ">Search Patient with Name or Patient_Id</h2></center>';
 				
@@ -72,7 +72,7 @@
 /*				echo 'LIST OF PATIENTS <br/>';
 				for($j=0; $j<$rows; $j++)
 				{
-					$tuple=mysql_fetch_array($resultCheck);
+					$tuple=mysqli_fetch_array($resultCheck);
 					echo '<a href = "records2.php?id='.$tuple['patient_username'].'">', $tuple['patient_fname'],' ', $tuple['patient_lname'] ,' ',  '</a> <br />';
 				}
 						

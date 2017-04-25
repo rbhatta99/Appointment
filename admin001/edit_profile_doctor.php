@@ -6,13 +6,13 @@
 	
 	//$conn = pg_connect('host=localhost dbname=healthcare user=postgres password=user'); 
 	
-	$conn=mysql_connect("localhost","root","root")or die("can not connect");
-	    mysql_select_db("healthcare",$conn) or die("can not select database");
+	$conn=mysqli_connect("localhost","root","root")or die("can not connect");
+	    mysqli_select_db("healthcare",$conn) or die("can not select database");
 	
 	$query="select doctor_lname, doctor_fname, doctor_mname, doctor_specialization, doctor_hospital, contactno, doctor_licenseno from doctor where doctor_username='{$username}';";
-	$result = mysql_query($query,$conn); 
+	$result = mysqli_query($query,$conn); 
 
-	$rows = mysql_num_rows($result);
+	$rows = mysqli_num_rows($result);
 	
 /*	$lastname = $_POST['lname'];
 	$firstname = $_POST['fname'];
@@ -23,7 +23,7 @@
 	$licenseinfo = $_POST['licenseinfo']; */
 	
 	for ($i=0; $i<$rows; $i++){
-				$tuple = mysql_fetch_array($result);
+				$tuple = mysqli_fetch_array($result);
 				
 				$lastname = $tuple['doctor_lname'];
 				$firstname = $tuple['doctor_fname'];
@@ -121,7 +121,7 @@
 		</body>
 		<html>";
 		
-		mysql_close($conn);
+		mysqli_close($conn);
 ?>
 				
 				

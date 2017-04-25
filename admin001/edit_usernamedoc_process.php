@@ -43,8 +43,8 @@
 	
 	//$conn = pg_connect('host=localhost dbname=healthcare user=postgres password=user'); 
 	
-	$conn=mysql_connect("localhost","root","root")or die("can not connect");
-	mysql_select_db("healthcare",$conn) or die("can not select database");
+	$conn=mysqli_connect("localhost","root","root")or die("can not connect");
+	mysqli_select_db("healthcare",$conn) or die("can not select database");
 	
 	$username=$_SESSION["username"];
 	$newuname=$_POST["newuname"];
@@ -52,9 +52,9 @@
 	$i=0;
 	
 	$checkUname = "select doctor_username from doctor where doctor_username='$newuname';";
-		$resultCheck = mysql_query($checkUname,$conn);
+		$resultCheck = mysqli_query($checkUname,$conn);
 		
-	while($myrow = mysql_fetch_assoc($resultCheck)) {
+	while($myrow = mysqli_fetch_assoc($resultCheck)) {
 			$i=$i+1;
 	}
 	
@@ -67,10 +67,10 @@
 	}
 	else{
 		$query = "update doctor set doctor_username='$newuname' where doctor_username='$olduname';"; 
-		$result = mysql_query($query,$conn); 
+		$result = mysqli_query($query,$conn); 
 				if (!$result) { 
 					echo "Problem with query " . $query . "<br/>"; 
-					//echo mysql_last_error(); 
+					//echo mysqli_last_error(); 
 				//	exit(); 
 				} 
 				else{
@@ -80,11 +80,11 @@
 
 					
 		$query1 = "update notification_system set receiver='$newuname' where receiver='$olduname';"; 
-		$result1 = mysql_query($query1,$conn); 			
+		$result1 = mysqli_query($query1,$conn); 			
 					
 			if (!$result1) { 
 					echo "Problem with query " . $query1 . "<br/>"; 
-					//echo mysql_last_error(); 
+					//echo mysqli_last_error(); 
 					//exit();
 					} 
 					
@@ -94,11 +94,11 @@
 					}
 					
 		$query2 = "update appointment set app_doctorusername='$newuname' where app_doctorusername='$olduname';"; 
-		$result2 = mysql_query($query2,$conn); 			
+		$result2 = mysqli_query($query2,$conn); 			
 					
 			if (!$result2) { 
 					echo "Problem with query " . $query2 . "<br/>"; 
-					//echo mysql_last_error(); 
+					//echo mysqli_last_error(); 
 					//exit();
 					} 
 					
@@ -109,7 +109,7 @@
 						
 	}
 	
-	mysql_close($conn);
+	mysqli_close($conn);
 ?>
 </div>
 </div>

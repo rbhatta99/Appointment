@@ -48,14 +48,14 @@
 	//$conn = _connect('host=localhost dbname=healthcare user=postgres password=user');
 	
 	$conn=mysql_connect("localhost","root","root")or die("can not connect");
-	mysql_select_db("healthcare",$conn) or die("can not select database");
+	mysqli_select_db("healthcare",$conn) or die("can not select database");
 	
 	if ($old!=$password){
 		echo "You have entered an incorrect password." ;
 	}
 	else{
 		$query = "update patient set patient_password='$new' where patient_username='$username'"; 
-		$result = mysql_query($query,$conn); 
+		$result = mysqli_query($query,$conn); 
 				if (!$result) { 
 					echo "Problem with query " . $query . "<br/>"; 
 				//	echo pg_last_error(); 
@@ -67,7 +67,7 @@
 				}
 	}
 
-	mysql_close($conn);
+	mysqli_close($conn);
 	
 ?>
 </div>

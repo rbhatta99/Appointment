@@ -50,22 +50,22 @@
 	//connecting to database
 	//$conn = pg_connect('host=localhost dbname=healthcare user=postgres password=user');
 
-	$conn=mysql_connect("localhost","root","root")or die("can not connect");
-	mysql_select_db("healthcare",$conn) or die("can not select database");
+	$conn=mysqli_connect("localhost","root","root")or die("can not connect");
+	mysqli_select_db("healthcare",$conn) or die("can not select database");
 	
 	if(isset($input))
 	{	
-		$resultCheck = mysql_query("select * from patient where patient_id = '".$input."'  or patient_fname = '".$input."'  ;",$conn);
+		$resultCheck = mysqli_query("select * from patient where patient_id = '".$input."'  or patient_fname = '".$input."'  ;",$conn);
 	}
 	
-	$rows = mysql_num_rows($resultCheck);
+	$rows = mysqli_num_rows($resultCheck);
 	
 	echo '
 		<h2 style="color:blue;"><u>Patient Details</u></h2>	
 		 '; 
 	
 	for($j=0; $j<$rows; $j++){
-		$tuple = mysql_fetch_array($resultCheck);
+		$tuple = mysqli_fetch_array($resultCheck);
 		echo 'PATIENT ID: ',$tuple['patient_id'] , '<br />';		
 		echo 'NAME: ',$tuple['patient_fname'] ,' ', $tuple['patient_mname'],' ',$tuple['patient_lname'], '<br />';	
 		echo 'SICKNESS: ', $tuple['patient_sickness'], '<br />';	

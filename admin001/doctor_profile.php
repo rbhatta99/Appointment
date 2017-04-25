@@ -120,15 +120,15 @@
 				//connecting to database
 				//$conn = pg_connect('host=localhost dbname=healthcare user=postgres password=user');
 
-				$conn=mysql_connect("localhost","root","root")or die("can not connect");
-	            mysql_select_db("healthcare",$conn) or die("can not select database");
+				$conn=mysqli_connect("localhost","root","root")or die("can not connect");
+	            mysqli_select_db("healthcare",$conn) or die("can not select database");
 				
-				$resultCheck = mysql_query("select * from doctor where doctor_username = '".$username."';",$conn);
+				$resultCheck = mysqli_query("select * from doctor where doctor_username = '".$username."';",$conn);
 					
-				$rows = mysql_num_rows($resultCheck);
+				$rows = mysqli_num_rows($resultCheck);
 				
 				for($j=0; $j<$rows; $j++){
-					$tuple = mysql_fetch_array($resultCheck);		 
+					$tuple = mysqli_fetch_array($resultCheck);		 
 					echo 'NAME: ', $tuple['doctor_fname'],' ', $tuple['doctor_lname'] ,' ', '<br />';	
 					echo 'SPECIALIZATION: ', $tuple['doctor_specialization'], '<br />';	
 					echo 'HOSPITAL: ', $tuple['doctor_hospital'], '<br />';	
@@ -175,8 +175,8 @@
 							}
 							//Weekday
 							else if ($j!=0 && $j<6) {
-								$sched_query = mysql_query("SELECT doctor_sched_wday FROM doctor WHERE doctor_username='$username'",$conn);
-								$sched_str = mysql_result($sched_query, 0);
+								$sched_query = mysqli_query("SELECT doctor_sched_wday FROM doctor WHERE doctor_username='$username'",$conn);
+								$sched_str = mysqli_result($sched_query, 0);
 								$sched_array = explode(",", $sched_str);
 								$count = count($sched_array);
 								for($k=0; $k<($count-1); $k++) {
@@ -187,8 +187,8 @@
 							}
 							//Saturday
 							else if($j == 6) {
-								$sched_query = mysql_query("SELECT doctor_sched_sat FROM doctor WHERE doctor_username='$username'",$conn);
-								$sched_str = mysql_result($sched_query, 0);
+								$sched_query = mysqli_query("SELECT doctor_sched_sat FROM doctor WHERE doctor_username='$username'",$conn);
+								$sched_str = mysqli_result($sched_query, 0);
 								$sched_array = explode(",", $sched_str);
 								$count = count($sched_array);
 								for($k=0; $k<($count-1); $k++) {
@@ -199,8 +199,8 @@
 							}
 							//Sunday
 							else if($j == 7) {
-								$sched_query = mysql_query("SELECT doctor_sched_sun FROM doctor WHERE doctor_username='$username'",$conn);
-								$sched_str = mysql_result($sched_query, 0);
+								$sched_query = mysqli_query("SELECT doctor_sched_sun FROM doctor WHERE doctor_username='$username'",$conn);
+								$sched_str = mysqli_result($sched_query, 0);
 								$sched_array = explode(",", $sched_str);
 								$count = count($sched_array);
 								for($k=0; $k<($count-1); $k++) {

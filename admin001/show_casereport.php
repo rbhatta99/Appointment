@@ -50,17 +50,17 @@
 			$input = $_GET["id"];    
             $input2=$_GET["date"];
 			
-				$conn=mysql_connect("localhost","root","root")or die("can not connect");
-	            mysql_select_db("healthcare",$conn) or die("can not select database");
+				$conn=mysqli_connect("localhost","root","root")or die("can not connect");
+	            mysqli_select_db("healthcare",$conn) or die("can not select database");
 				
 				if(isset($input)){	
-		$resultCheck = mysql_query("select * from records where patient_id = '".$input."' and dates='".$input2."';",$conn);
+		$resultCheck = mysqli_query("select * from records where patient_id = '".$input."' and dates='".$input2."';",$conn);
 	}	
-	$rows = mysql_num_rows($resultCheck);
+	$rows = mysqli_num_rows($resultCheck);
 	if($rows)
 	{	
 	for($j=0; $j<$rows; $j++){
-		$tuple = mysql_fetch_array($resultCheck);		
+		$tuple = mysqli_fetch_array($resultCheck);		
 		echo 'PATIENT ID: ',$tuple['patient_id'] , '<br />';		
 		echo 'NAME: ',$tuple['patientname'] , '<br />';	
 		echo 'SICKNESS: ', $tuple['sickness'], '<br />';	

@@ -1,13 +1,13 @@
 <?php session_start();
 	$username=$_SESSION["username"];
 	//$conn = pg_connect('host=localhost dbname=healthcare user=postgres password=user'); 
-	$conn=mysql_connect("localhost","root","root")or die("can not connect");
-	    mysql_select_db("healthcare",$conn) or die("can not select database");
+	$conn=mysqli_connect("localhost","root","root")or die("can not connect");
+	    mysqli_select_db("healthcare",$conn) or die("can not select database");
 	    $input = $_GET['id'];
 		if(isset($input)){	
-		$resultCheck = mysql_query("select * from patient where patient_username = '".$input."';",$conn);
+		$resultCheck = mysqli_query("select * from patient where patient_username = '".$input."';",$conn);
 	}
-	$tuple = mysql_fetch_array($resultCheck);
+	$tuple = mysqli_fetch_array($resultCheck);
 	$patient_id=$tuple['patient_id'];	
 	$patient_name=$tuple['patient_fname'].' '.$tuple['patient_mname'].' '.$tuple['patient_lname'];
 	$_SESSION["p_id"]=$patient_id;

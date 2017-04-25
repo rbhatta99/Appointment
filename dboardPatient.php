@@ -65,7 +65,7 @@
 					</div>
 					<div class="clearance"></div>
 			<!--		<div class="notifications">
-				<!--		<?php
+				//	<?php
 							display_notification($_SESSION["username"]);
 						?>
 				-->		

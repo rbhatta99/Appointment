@@ -48,8 +48,8 @@
 	//$conn = pg_connect('host=localhost dbname=healthcare user=postgres password=user');
 		
 		
-		$conn=mysql_connect("localhost","root","root")or die("can not connect");
-	    mysql_select_db("healthcare",$conn) or die("can not select database");
+		$conn=mysqli_connect("localhost","root","root")or die("can not connect");
+	    mysqli_select_db("healthcare",$conn) or die("can not select database");
 		
 		if ($old!=$password){
 			print '<script type="text/javascript">';
@@ -57,7 +57,7 @@
 		}
 		else{
 			$query = "update doctor set doctor_password='$new' where doctor_username='$username';"; 
-			$result = mysql_query($query,$conn); 
+			$result = mysqli_query($query,$conn); 
 					if (!$result) { 
 						echo "Problem with query " . $query . "<br/>"; 
 						//echo pg_last_error(); 
@@ -69,7 +69,7 @@
 					}
 		}
 
-	mysql_close($conn);
+	mysqli_close($conn);
 ?>
 </div>
 </div>

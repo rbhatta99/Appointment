@@ -53,8 +53,8 @@
 	
 	//$conn = pg_connect('host=localhost dbname=healthcare user=postgres password=user'); 
 
-	$conn=mysql_connect("localhost","root","root")or die("can not connect");
-	    mysql_select_db("healthcare",$conn) or die("can not select database");
+	$conn=mysqli_connect("localhost","root","root")or die("can not connect");
+	    mysqli_select_db("healthcare",$conn) or die("can not select database");
 		
 	/*$query = "update doctor set (doctor_lname, doctor_fname, doctor_mname, doctor_specialization, doctor_hospital, contactno, doctor_licenseno) = 
 					('{$lastname}','{$firstname}','{$middlename}','{$specialization}','{$hospital}','{$contact}','{$licenseinfo}')
@@ -63,7 +63,7 @@
     $query = "update doctor set doctor_lname='$lastname', doctor_fname='$firstname', doctor_mname='$middlename', doctor_specialization='$specialization', 
 	                       doctor_hospital='$hospital', contactno='$contact',doctor_licenseno='$licenseinfo' where doctor_username='$username'";		
 	
-	$result = mysql_query($query,$conn); 
+	$result = mysqli_query($query,$conn); 
 	if (!$result) { 
 		echo "Problem with query " . $query . "<br/>"; 
 	//	echo pg_last_error(); 
@@ -74,7 +74,7 @@
 						echo "Your profile information was successfully edited.";
 	}
 	
-	mysql_close($conn);
+	mysqli_close($conn);
 ?>
 </div>
 </div>

@@ -2,8 +2,8 @@
 	session_start();
 	$username=$_SESSION["username"];
 	//$conn = pg_connect('host=localhost dbname=healthcare user=postgres password=user'); 
-	$conn=mysql_connect("localhost","root","root")or die("can not connect");
-	    mysql_select_db("healthcare",$conn) or die("can not select database");
+	$conn=mysqli_connect("localhost","root","root")or die("can not connect");
+	    mysqli_select_db("healthcare",$conn) or die("can not select database");
 	    $input = $_GET['id'];
 		$input2= $_GET['date'];
 		$_SESSION["p_id"]= $input;

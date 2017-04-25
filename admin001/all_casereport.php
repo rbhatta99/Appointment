@@ -48,17 +48,17 @@
 			//connecting to database
 			//	$conn = pg_connect('host=localhost dbname=healthcare user=postgres password=user');						
 			$input = $_GET["id"];                
-				$conn=mysql_connect("localhost","root","root")or die("can not connect");
-	            mysql_select_db("healthcare",$conn) or die("can not select database");
+				$conn=mysqli_connect("localhost","root","root")or die("can not connect");
+	            mysqli_select_db("healthcare",$conn) or die("can not select database");
 				
 				if(isset($input)){	
 		$resultCheck = mysql_query("select * from records where patient_id = '".$input."';",$conn);
 	}	
-	$rows = mysql_num_rows($resultCheck);
+	$rows = mysqli_num_rows($resultCheck);
 	if($rows)
 	{	
 	for($j=0; $j<$rows; $j++){
-		$tuple = mysql_fetch_array($resultCheck);
+		$tuple = mysqli_fetch_array($resultCheck);
 		echo 'Case Report No.',$j+1,'<br />';
 		echo 'Patient ID: ',$tuple['patient_id'] , '<br />';		
 		echo 'Name of Patient: ',$tuple['patientname'] , '<br />';		

@@ -51,8 +51,8 @@
 			<?php
 				//$conn = pg_connect('host=localhost dbname=healthcare user=postgres password=user');
 				
-				$conn=mysql_connect("localhost","root","root")or die("can not connect");
-	            mysql_select_db("healthcare",$conn) or die("can not select database");
+				$conn=mysqli_connect("localhost","root","root")or die("can not connect");
+	            mysqli_select_db("healthcare",$conn) or die("can not select database");
 				
 				$username = $_SESSION['username'];	
 				
@@ -60,7 +60,7 @@
 				
 				$query = "SELECT app_doctorname, app_number, app_patientname, app_date, app_time, app_hospital, app_status FROM appointment WHERE app_doctorusername='$username' ";//ORDER BY app_number";
 
-				$result = mysql_query($query,$conn);
+				$result = mysqli_query($query,$conn);
 				
 				
 				
@@ -79,7 +79,7 @@
 
 					$x = 1;
 					
-					while ($row = mysql_fetch_row($result))
+					while ($row = mysqli_fetch_row($result))
 					{	
 					//echo "jinto";
 					//echo $row['app_status'];
@@ -130,8 +130,8 @@
 								echo '<td>
 										<form action="cancel_apprequest.php" method="post">';
 								/*Get time difference in minutes*/
-								$timestamp_query = mysql_query("SELECT app_date, app_time FROM appointment WHERE app_number='$tableID'",$conn);
-								$timestamp_array = mysql_fetch_array($timestamp_query);
+								$timestamp_query = mysqli_query("SELECT app_date, app_time FROM appointment WHERE app_number='$tableID'",$conn);
+								$timestamp_array = mysqli_fetch_array($timestamp_query);
 								$time_difference = check_time($timestamp_array[0], $timestamp_array[1]);
 								
 								/*If the time_difference is more than 24 hours*/
@@ -155,7 +155,7 @@
 				echo '<br/>';
 				
 				$query = "SELECT app_doctorname, app_number, app_patientname, app_date, app_time, app_hospital, app_status FROM appointment WHERE app_doctorusername='$username' ORDER BY app_number";
-				$result = mysql_query($query,$conn);
+				$result = mysqli_query($query,$conn);
 			  
 //-----------OLD APPOINTMETS................
 
@@ -172,7 +172,7 @@
 							</tr>';
 
 					$x = 1;
-					while ($row = mysql_fetch_row($result)) {
+					while ($row = mysqli_fetch_row($result)) {
 						if($row[6] == "Old"){
 							echo '<tr>';
 							
@@ -202,7 +202,7 @@
 					echo '</table>';
 				echo '</div>';
 				
-				mysql_close($conn);
+				mysqli_close($conn);
 			?>
 		</div>
 	</body>

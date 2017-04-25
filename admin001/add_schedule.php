@@ -46,14 +46,14 @@
 	}
 	/*****Lhea's changes end here!*****/
 	
-	$conn = pg_connect('host=localhost dbname=healthcare user=postgres password=user');	
+	$conn = mysqli_connect('host=localhost dbname=healthcare user=root password=root');	
 
 	$query = "UPDATE doctor SET doctor_sched_wday='". $time_array_wday[0] . "' WHERE doctor_username='$username'";
-	$result = pg_query($query);
+	$result = mysqli_query($query);
 	$query = "UPDATE doctor SET doctor_sched_sat='". $time_array_sat[0] . "' WHERE doctor_username='$username'";
-	$result = pg_query($query);
+	$result = mysqli_query($query);
 	$query = "UPDATE doctor SET doctor_sched_sun='". $time_array_sun[0] . "' WHERE doctor_username='$username'";	
-	$result = pg_query($query);
+	$result = mysqli_query($query);
 	
-	pg_close($conn);
+	mysqli_close($conn);
 ?>

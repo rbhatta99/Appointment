@@ -1,7 +1,7 @@
 <?php 
 session_start();
-$conn=mysql_connect("localhost","root","root")or die("can not connect");
-mysql_select_db("healthcare",$conn) or die("can not select database");
+$conn=mysqli_connect("localhost","root","root")or die("can not connect");
+mysqli_select_db("healthcare",$conn) or die("can not select database");
 if(empty($_POST))
 {exit;}	
 
@@ -19,7 +19,7 @@ $report=$_POST['report'];
 //echo $report;
 $query = "insert into records (patient_id,dates,patientname,sickness,doctorname,casereport) values
 			('{$id}','{$bdate}','{$pname}','{$sickness}','{$dname}','{$report}');";
-			$result = mysql_query($query,$conn); 
+			$result = mysqli_query($query,$conn); 
 $id=$_SESSION["p_id"];	
 $date=$_SESSION["date"];
 $dir='uploaded_files/'.$id.'_'.$date.'/';
@@ -113,11 +113,11 @@ if(isset($_POST) && $_SERVER['REQUEST_METHOD'] == "POST")
 				include "config.php"; 
 				
 				// Check for existing file
-				$check_existing_file = mysql_query("select * from `uploads` where `file_id` = '".mysql_real_escape_string($vpb_file_id)."'");
-				if(mysql_num_rows($check_existing_file) < 1)
+				$check_existing_file = mysqli_query("select * from `uploads` where `file_id` = '".mysqli_real_escape_string($vpb_file_id)."'");
+				if(mysqli_num_rows($check_existing_file) < 1)
 				{
 					//Save this file because it does not already exist in the database table
-					if(mysql_query("insert into `uploads` values('', '".mysql_real_escape_string($vpb_file_id)."', '".mysql_real_escape_string($vpb_file_name)."')"))
+					if(mysqli_query("insert into `uploads` values('', '".mysqli_real_escape_string($vpb_file_id)."', '".mysqli_real_escape_string($vpb_file_name)."')"))
 					{
 						//Display the file id
 						echo $vpb_file_id;
