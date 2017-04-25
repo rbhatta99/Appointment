@@ -11,7 +11,7 @@
 	    $pword= $_POST['pword'];
 		$eadd= $_POST['eadd'];
 		
-		if($role=='patient'){
+		if($_POST['signup_option']=='patient'){
 				echo"
 				<html>
 				<head>
@@ -33,7 +33,7 @@
 						
 						<div id='form-content'>
 						<h1>
-						<li > Doctor Sign Up Form</li>
+						<li >Patient Registration</li>
 						</h1>
 					
 						<form action='process_signup_patient.php' method='post'>
@@ -98,7 +98,7 @@
 					<div class='fieldname'>Gender</div>
 						<div class='holding'>
 							<div class='sidetip'>Are you a he or a she?</div>
-							<select name='gender'>
+							<select name='gender'> 
 								<option value='male'>Male</option>
 								<option value='female'>Female</option>
 							</select>
@@ -160,7 +160,7 @@
 				<html>";
 		}
 		
-		if($role=='doctor'){
+		if($_POST['signup_option']=='doctor'){
 			echo "
 					<html>
 			<head>
@@ -180,7 +180,7 @@
 					<div class='signup'>
 						<div id = 'userInfo'>
 							<h1>
-								Sign up Patient
+								Doctor Registration
 							</h1>
 							<form action='process_signup_patient.php' method='post'>
 								
@@ -219,71 +219,20 @@
 						
 					</div>
 				</div>
-				<div name='sickness'>
-					<div class='fieldname'>Sickness</div>
+				<div name='specialization'>
+					<div class='fieldname'>Specialization</div>
 					<div class='holding'>
-						<div class='sidetip'>What made you sick?</div>
-							<input type='text' name='sickness' value=''>
+						<div class='sidetip'>What have you specialized in?</div>
+							<input type='text' name='specializtaion' value=''>
 					</div>
 				</div>
-				<div name='age'>
-					<div class='fieldname'>Age</div>
+				<div name='hospital'>
+					<div class='fieldname'>Hospital</div>
 					<div class='holding'>
-						<div class='sidetip'>How old are you?</div>
-							<input type='text' name='age' value='' />
+						<div class='sidetip'>Where do you work?</div>
+							<input type='text' name='hospital' value='' />
 					</div>
 				</div>
-				<div class='birthdate'>
-					<div class='fieldname'>Birthdate</div>
-						<div class='holding'>
-							<div class='sidetip'>What is your birthdate?</div>
-								<input type='date' name='bdate' required='required' />
-						</div>
-				</div>
-				<div class='gender'>
-					<div class='fieldname'>Gender</div>
-						<div class='holding'>
-							<div class='sidetip'>Are you a he or a she?</div>
-							<select name='gender'>
-								<option value='male'>Male</option>
-								<option value='female'>Female</option>
-							</select>
-						</div>
-				</div>
-				<div class='height'>
-					<div class='fieldname'>Height</div>
-					<div class='holding'>
-						<div class='sidetip'>How tall are you? (In cm.)</div>
-						<input type='text' name='height' value='' required='required' />
-					</div>
-				</div>
-				<div class='weight'>
-					<div class='fieldname'>Weight</div>
-					<div class='holding'>
-						<div class='sidetip'>How heavy are you? (In kg.)</div>
-						<input type='text' name='weight' value='' required='required'> 
-					</div>
-				</div>
-				<div class='weight'>
-					<div class='fieldname'>Status</div>
-					<div class='holding'>
-						<div class='sidetip'>What is your civil status?</div>
-						<select name='status'>
-							<option value='single'>Single</option>
-							<option value='married'>Married</option>
-							<option value='widowed'>Widowed</option>
-						</select>
-					</div>
-				</div>
-				<div class='address'>
-					<div class='fieldname'>Address</div>
-					<div class='holding'>
-						<div class='sidetip'>Where do you live?</div>
-						<input type='text' name='address' value='' required='required'/>
-					</div>
-				</div>
-				
-				
 				<div class='contact'>
 					<div class='fieldname'>Contact Information</div>
 					<div class='holding'>
@@ -291,6 +240,46 @@
 						<input type='text' name='contactNum' value='' required='required' />
 					</div>
 				</div>
+				<div class='rstatus'>
+					<div class='fieldname'>Rstatus</div>
+						<div class='holding'>
+							<div class='sidetip'>What is your rstatus?</div>
+								<input type='text' name='rstatus' required='required' />
+						</div>
+				</div>
+				<div class='licenseno'>
+					<div class='fieldname'>Licensenoicenseno</div>
+						<div class='holding'>
+							<div class='sidetip'>Enter your license number.</div>
+							<input type='text' name='licenseno' required='required'/>
+						</div>
+				</div>
+				<div class='sched_wday'>
+					<div class='fieldname'>Weekday Schedule</div>
+					<div class='holding'>
+						<div class='sidetip'>working hours during weekdays!</div>
+						<input type='text' name='sched_wday' value='' required='required' />
+					</div>
+				</div>
+				<div class='sched_sat'>
+					<div class='fieldname'>Saturday Schedule</div>
+					<div class='holding'>
+						<div class='sidetip'>When are you availabe on saturdays?</div>
+						<input type='text' name='sched_sat' value='' required='required'> 
+					</div>
+				</div>
+				<div class='sched_sun'>
+					<div class='fieldname'>Sunday Schedule</div>
+					<div class='holding'>
+						<div class='sidetip'>When are you availabe on sundays?</div>
+						</div>
+						<input type='text' name='sched_sun' value='' required='required'> 
+					
+				</div>
+				
+				
+				
+				
 				<input id='submit_btn'type='submit' name='submit' value='Create my account.'/> </td>
 			</fieldset>
 							</form>

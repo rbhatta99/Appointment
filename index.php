@@ -91,7 +91,7 @@ require "dbconnect.php";
 						<select name="signup_option">
 								<option value="doctor">Doctor</option>
 								<option value="patient">Patient</option>
-							</select>  -->
+							</select> -->
 						</h2>
 						
 						
@@ -107,8 +107,12 @@ require "dbconnect.php";
 								<input type="password" id="signup-user-password" class="text-input" name="pword" placeholder="password">
 								<!--label for="signup-user-password" class="placeholder">Password</label-->
 							</div>
-							<input type="hidden" name="signup_option" value="patient">
-							<button type="submit" class="btn signup-btn">Sign up for HCS</button>
+							
+							<input type="submit" name="signup_option" value="patient"> 
+							<input type="submit" name="signup_option" value="doctor"> 
+							<!--<button type="submit"  class="btn signup-btn" >Sign up for HCS</button>-->
+							
+	
 						</form>
 						
 					 </div>
