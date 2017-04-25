@@ -125,7 +125,7 @@ require "dbconnect.php"
 	while($myrow2 = mysqli_fetch_assoc($resultCheck2)) {
 			$a=$a+1;
 	}
-	// echo $a;
+	echo $a;
 	if ($a==0){
 		$query = "insert into patient (patient_id,patient_username, patient_password, patient_eadd, patient_lname, patient_fname, patient_mname, patient_sickness, patient_age, patient_birthdate, patient_gender, patient_height, patient_weight, patient_status, patient_address, patient_contactno, patient_rstatus) values
 			('{$patientid}','{$patient_username}','{$patient_password}','{$patient_eadd}','{$patient_lname}','{$patient_fname}','{$patient_mname}','{$patient_sickness}','{$patient_age}',

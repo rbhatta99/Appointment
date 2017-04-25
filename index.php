@@ -86,7 +86,7 @@ require "dbconnect.php";
 					 <div class="front-signup">
 						<h2>
 							<strong>No account yet?</strong>Sign Up Please							
-						<form action="signup2.php" class="signup" method="post" name="myForm" onsubmit="return validateForm()">
+						<!-- <form action="signup2.php" class="signup" method="post" name="myForm" onsubmit="return validateForm()"> -->
 						<!--
 						<select name="signup_option">
 								<option value="doctor">Doctor</option>
@@ -95,25 +95,14 @@ require "dbconnect.php";
 						</h2>
 						
 						
-							<div class="placeholding-input">
-								<input type="text" id="signup-user-name" class="text-input" name="uname" placeholder="Username">
-								<!--label for="signup-user-name" class="placeholder">Username</label-->
-							</div>
-							<div class="placeholding-input">
-								<input type="text" id="signup-user-email" class="text-input" name="eadd" placeholder="Email">
-								<!--label for="signup-user-email" class="placeholder">Email</label-->
-							</div>
-							<div class="placeholding-input">
-								<input type="password" id="signup-user-password" class="text-input" name="pword" placeholder="password">
-								<!--label for="signup-user-password" class="placeholder">Password</label-->
-							</div>
-							
-							<input type="submit" name="signup_option" value="patient"> 
-							<input type="submit" name="signup_option" value="doctor"> 
-							<!--<button type="submit"  class="btn signup-btn" >Sign up for HCS</button>-->
+							<a href="signup2.php?type=doc"><button  class="btn signup-btn">Sign up as doctor </button></a>							
+							<a href="signup2.php?type=pat"><button  class="btn signup-btn">Sign up patient</button></a>
+							<!-- <input type="submit" name="signup_option" class="btn signup-btn" value="patient"> 
+							<input type="submit" name="signup_option" class="btn signup-btn" value="doctor"> 
+							 --><!--<button type="submit"  class="btn signup-btn" >Sign up for HCS</button>-->
 							
 	
-						</form>
+						<!-- </form> -->
 						
 					 </div>
 						

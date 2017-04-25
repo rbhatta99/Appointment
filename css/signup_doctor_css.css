@@ -161,7 +161,7 @@ input#submit_btn {
 .sidetip {
 	margin-top: 8px;
 	position: absolute;
-	left:505px;
+	left:800px;
 	width: 250px;
 	font-size: 13px;
 	line-height: 16px;
@@ -179,7 +179,7 @@ width: 382px;
 .sidetip-lname,.sidetip-mname{
 	margin-top: 16px;
 	position: absolute;
-	left: 505px;
+	left: 800px;
 	width: 250px;
 	font-size: 13px;
 	line-height: 16px;

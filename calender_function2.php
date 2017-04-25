@@ -1,5 +1,5 @@
 <?php 
-require "dbconnect.php";
+// require "dbconnect.php";
 /* draws a calendar */
 function draw_calendar($month,$year){
     /* draw table */

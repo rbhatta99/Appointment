@@ -4,7 +4,7 @@
 	//if ($_SESSION['login']==0){
 
 		$username = $_POST['input_uname'];
-		$password = $_POST['input_pword'];
+		$password = md5($_POST['input_pword']);
 		$a=0;
 		$b=0;
 		$c=0;

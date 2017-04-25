@@ -1,21 +1,26 @@
 
 	<?php
+	require "dbconnect.php";
+
+$sqldegree="select * from degreeinfo";
+$sqlspecial="select * from specializationinfo";
+
+	$resultdegree=mysqli_query($conn,$sqldegree);
+$resultspecial=mysqli_query($conn,$sqlspecial);
 	
 	
 	
 	
-	
-	
-		$role = $_POST['signup_option'];
-		$uname= $_POST['uname'];
-	    $pword= $_POST['pword'];
-		$eadd= $_POST['eadd'];
+		$role = $_REQUEST['type'];
+		// $uname= $_POST['uname'];
+	 //    $pword= $_POST['pword'];
+		// $eadd= $_POST['eadd'];
 		
-		if($_POST['signup_option']=='patient'){
+		if($role=='pat'){
 				echo"
 				<html>
 				<head>
-					<title>Sign Up - Doctor</title>
+					<title>Sign Up - Patient</title>
 					<link rel='stylesheet' type='text/css' href='css/signup_doctor_css.css'/>
 					<link rel='stylesheet' type='text/css' href='css/login_page.css' />
 					
@@ -33,7 +38,7 @@
 						
 						<div id='form-content'>
 						<h1>
-						<li >Patient Registration</li>
+						Patient Registration
 						</h1>
 					
 						<form action='process_signup_patient.php' method='post'>
@@ -43,7 +48,7 @@
 					<div class='fieldname'>Username</div>
 					<div class='holding'>
 						<div class='sidetip'>Don't worry, you can change it later.</div>
-							<input type='text' name='username' value='$uname' required='required'>
+							<input type='text' name='username' required='required'>
 					</div>
 				</div>
 				
@@ -51,14 +56,14 @@
 					<div class='fieldname'>Password</div>
 					<div class='holding'>
 						<div class='sidetip'>6 characters or more! Be tricky.</div>
-							<input type='password' name='password' value='$pword' required='required'/>
+							<input type='password' name='password'  required='required'/>
 					</div>
 				</div>
 				<div class='email'>
 					<div class='fieldname'>Email Address</div>
 					<div class='holding'>
 						<div class='sidetip'>What’s your email address?</div>
-						<input type='text' name='eadd' value='$eadd' required='required' /> 
+						<input type='text' name='eadd' required='required' /> 
 					</div>
 				</div>
 				<div class='name'>
@@ -97,7 +102,7 @@
 				<div class='gender'>
 					<div class='fieldname'>Gender</div>
 						<div class='holding'>
-							<div class='sidetip'>Are you a he or a she?</div>
+							
 							<select name='gender'> 
 								<option value='male'>Male</option>
 								<option value='female'>Female</option>
@@ -160,14 +165,22 @@
 				<html>";
 		}
 		
-		if($_POST['signup_option']=='doctor'){
+		else if($role=='doc'){
 			echo "
 					<html>
 			<head>
-			<title>Healthcare System</title>
-			<link rel='stylesheet' type='text/css' href='signup_doctor_css.css'>
+			<title>Sign up - Doctor</title>
+			
 		     <link rel='stylesheet' type='text/css' href='css/login_page.css' />
-	
+		     <link rel='stylesheet' type='text/css' href='css/signup_doctor_css.css'/>
+			
+			<link rel='stylesheet' href='//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'>
+			<script type='text/javascript' src='js/jquery-3.2.1.min.js'></script>
+			<script type='text/javascript' src='js/validatedoctor.js'></script> 
+			<script src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
+			<script src='js/jquery.sumoselect.min.js'></script>
+			<link href='css/sumoselect.css' rel='stylesheet' />
+
 	        
 	
 			</head>
@@ -182,6 +195,7 @@
 							<h1>
 								Doctor Registration
 							</h1>
+							<div id='form-content'>
 							<form action='process_signup_patient.php' method='post'>
 								
 								<fieldset class='textbox'>		
@@ -189,7 +203,7 @@
 					<div class='fieldname'>Username</div>
 					<div class='holding'>
 						<div class='sidetip'>Don't worry, you can change it later.</div>
-							<input type='text' name='username' value='$uname' required='required'>
+							<input type='text' name='username' required='required'>
 					</div>
 				</div>
 				
@@ -197,25 +211,25 @@
 					<div class='fieldname'>Password</div>
 					<div class='holding'>
 						<div class='sidetip'>6 characters or more! Be tricky.</div>
-							<input type='password' name='password' value='$pword' required='required'/>
+							<input type='password' name='password' required='required'/>
 					</div>
 				</div>
 				<div class='email'>
 					<div class='fieldname'>Email Address</div>
 					<div class='holding'>
 						<div class='sidetip'>What’s your email address?</div>
-						<input type='text' name='eadd' value='$eadd' required='required' /> 
+						<input type='text' name='eadd' required='required' /> 
 					</div>
 				</div>
 				<div class='name'>
 					<div class='fieldname'>Name</div>
 					<div class='holding'>
 						<div class='sidetip'>Enter your last name.</div>
-							<input class='lname' type='text' name='lName' value='Last name' required='required'>
+							<input class='lname' type='text' name='lName' placeholder='Last name' required='required'>
 						<div class='sidetip-lname'>Enter your first name.</div>
-							<input class='fname' type='text' name='fName' value='First name' required='required'> 
+							<input class='fname' type='text' name='fName' placeholder='First name' required='required'> 
 						<div class='sidetip-mname'>Enter your middle name.</div>
-							<input class='mname' type='text' name='mName' value='Middle name' required='required'> 
+							<input class='mname' type='text' name='mName' placeholder='Middle name' required='required'> 
 						
 					</div>
 				</div>
@@ -223,7 +237,18 @@
 					<div class='fieldname'>Specialization</div>
 					<div class='holding'>
 						<div class='sidetip'>What have you specialized in?</div>
-							<input type='text' name='specializtaion' value=''>
+							<select id='specialization' name='specialization' multiple='multiple'>
+								";
+
+							while($rws=mysqli_fetch_array($resultspecial)){
+								echo"
+								<option value='".$rws['SpecializationID']."'>".$rws['Name']."</option>
+								";
+
+							}
+
+							echo"	
+							</select>
 					</div>
 				</div>
 				<div name='hospital'>
@@ -248,7 +273,7 @@
 						</div>
 				</div>
 				<div class='licenseno'>
-					<div class='fieldname'>Licensenoicenseno</div>
+					<div class='fieldname'>License Number</div>
 						<div class='holding'>
 							<div class='sidetip'>Enter your license number.</div>
 							<input type='text' name='licenseno' required='required'/>
@@ -283,6 +308,7 @@
 				<input id='submit_btn'type='submit' name='submit' value='Create my account.'/> </td>
 			</fieldset>
 							</form>
+							</div>
 						</div>
 					</div>
 				</div>

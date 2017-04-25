@@ -1,6 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
-
+/*check*/
 body
 {
 	font-family: "Helvetica Neue", Arial, sans-serif;
@@ -14,6 +14,7 @@ body
 	line-height: 18px;
 	color: #333;
 }
+
 
 label
 {
@@ -227,10 +228,11 @@ height: 20px;
 	box-shadow: 0 1px 0 rgba(0,0,0,.1);
 	
 	position: absolute;
+	text-align: center;
 	top: 121px;
 	left: 536px;
 	width: 300px;
-	height: 240px;
+	height: 140px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
@@ -240,6 +242,10 @@ height: 20px;
 {
 	font-weight: 500;
 	color: #333;
+}
+
+#doctorsignup{
+	margin-left: 0px;
 }
 
 .front-signup h2, .front-signin h2
@@ -263,9 +269,9 @@ height: 20px;
 }
 
 .front-signup .placeholding-input {
-	display: block;
+	display: inline-block;
 	width: 276px;
-	height: 30px;
+	height: 1000px;
 	margin: 6px auto;
 }
 
@@ -283,13 +289,21 @@ box-shadow: inset 0 1px 0 #eee,#fff 0 1px 0;
 }
 
 
+#locationdiv{
+	display: inline;
+
+}
+
+#locationdiv #zip,#locationdiv #city,#locationdiv #state{
+	width: auto !important;
+}
 
 .front-signup .signup {
 padding: 0;
 }
 
 .front-signup .placeholding-input {
-	display: block;
+	display: inline-block;
 	width: 276px;
 	height: 30px;
 	margin: 6px auto;
@@ -476,7 +490,7 @@ box-shadow: 0 1px 0 #fff;
 
 
 .signup-btn {
-	position: absolute;
+	/*position: absolute;*/
 	display: inline-block;
 	padding: 5px 10px;
 	font-size: 13px;
@@ -675,4 +689,15 @@ user-select: none;
 
 .text-input, .table-input{
 	color: #777;
+}
+
+.error{
+	/*border: 4px;*/
+	/*border-color: red;*/
+	box-shadow: 0  0 3px rgba(255,0,0,1);
+}
+
+.success{
+	/*border: 1px;*/
+	box-shadow: 0  0 3px rgba(0,255,0,1);	
 }
