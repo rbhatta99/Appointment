@@ -42,12 +42,12 @@
 		
 		
 		
-			$result = mysqli_query($conn,"select patient_rstatus from patient where patient_username='{$username}'");
+			$result = mysqli_query($conn,"select patient_deleted from patient where patient_username='{$username}'");
 			$status = mysqli_fetch_row($result);
 			
 			
 			
-			if($status[0] == "approved"){
+			if($status[0] == "n"){
 				$_SESSION["login"] = 1;
 				$result = mysqli_query($conn,"select patient_fname from patient where patient_username='{$username}'");
 				$name = mysqli_fetch_row($result);
