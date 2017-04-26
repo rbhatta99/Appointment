@@ -18,16 +18,22 @@ require "dbconnect.php";
 				$app_dweek = date('l', strtotime($app_date));
 		//		echo '<p>' . $app_date . ' (' . $app_dweek . ')</p>';					
 				if($app_dweek == "Saturday") {
-					$sched_query = mysqli_query($conn,"SELECT doctor_sched_sat FROM doctor WHERE doctor_username='$doctor_user'");
+					$sched_query = mysqli_query($conn,"SELECT * FROM  availability_saturday WHERE doctor_username='$doctor_user'");
 				}
 				else if($app_dweek == "Sunday") {
-					$sched_query = mysqli_query($conn,"SELECT doctor_sched_sun FROM doctor WHERE doctor_username='$doctor_user'");
+					$sched_query = mysqli_query($conn,"SELECT *  FROM availability_sunday WHERE doctor_username='$doctor_user'");
 				}
 				else {
-					$sched_query = mysqli_query($conn,"SELECT doctor_sched_wday FROM doctor WHERE doctor_username='$doctor_user'");
+					$sched_query = mysqli_query($conn,"SELECT * FROM availability_weekday WHERE doctor_username='$doctor_user'");
 				}
-				$sched_str = mysqli_result($sched_query, 0);
-				$sched_array = explode(",", $sched_str);
+				//$sched_str = mysqli_result($sched_query, 0);
+				$i=0;
+				while($rws=mysqli_fetch_array($sched_query))
+				{
+				$sched_array[$i] =$rws['time'];
+				$i++;
+				}
+				print_r($sched_array);
 				/*---------------------------------------------------------------- */
 				//Disply array
 				/*for($i=0; $i<count($sched_array)-1; $i++) 
@@ -141,74 +147,74 @@ require "dbconnect.php";
 
 <?php
 $set=0;	
-$time1="8:00AM";
+$time1="8am";
 for($i=0;$i<count($sched_array);$i++)
 {    if($time1 == $sched_array[$i])
-	 {echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="8:00AM"  > 8.00AM </td>';
+	 {echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="8:am"  > 8.00am </td>';
 	 $set=$set+1;}
 }
 if($set==0)
-{echo'<td style="color:red; text-align:left;width=50% "> <input type="radio" name="app_time" id="app_time"  disabled ><strike> 8.00AM </td>';}
+{echo'<td style="color:red; text-align:left;width=50% "> <input type="radio" name="app_time" id="app_time"  disabled ><strike> 8.00am </td>';}
 ?>
 
 <?php
 $set=0;	
-$time1="8:30AM";
+$time1="8:30am";
 for($i=0;$i<count($sched_array);$i++)
 {    if($time1 == $sched_array[$i])
-	 {echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time"  value="8:30AM"> 8.30AM </td>';
+	 {echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time"  value="8:30am"> 8.30am </td>';
 	 $set=$set+1;}
 }
 if($set==0)
-{echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 8.30AM </td>';}
+{echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 8.30am </td>';}
 ?>	  
   </tr>
 <tr> 
 <?php
 $set=0;	
-$time1="9:00AM";
+$time1="9am";
 for($i=0;$i<count($sched_array);$i++)
 {    if($time1 == $sched_array[$i])
-	 {echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="9:00AM"> 9.00AM </td>';
+	 {echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="9am"> 9.00am </td>';
 	 $set=$set+1;}
 }
 if($set==0)
-{echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 9.00AM </td>';}
+{echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 9.00am </td>';}
 ?>  
 <?php
 $set=0;	
-$time1="9:30AM";
+$time1="9:30am";
 for($i=0;$i<count($sched_array);$i++)
 {    if($time1 == $sched_array[$i])
-	 {echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="9:30AM"> 9.30AM </td>';
+	 {echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="9:30am"> 9.30am </td>';
 	 $set=$set+1;}
 }
 if($set==0)
-{echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 9.30AM </td>';}
+{echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 9.30am </td>';}
 ?>	 
 </tr>
 <tr> 
 <?php
 $set=0;	
-$time1="10:00AM";
+$time1="10am";
 for($i=0;$i<count($sched_array);$i++)
 {    if($time1 == $sched_array[$i])
-	 {echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="10:00AM"> 10.00AM </td>';
+	 {echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="10am"> 10.00am </td>';
 	 $set=$set+1;}
 }
 if($set==0)
-{echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 10.00AM </td>';}
+{echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 10.00am </td>';}
 ?>		  
 <?php
 $set=0;	
-$time1="10:30AM";
+$time1="10:30am";
 for($i=0;$i<count($sched_array);$i++)
 {    if($time1 == $sched_array[$i])
-	 {echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="10:30AM"> 10.30AM </td>';
+	 {echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="10:30am"> 10.30am </td>';
 	 $set=$set+1;}
 }
 if($set==0)
-{echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 10.30AM </td>';}
+{echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 10.30am </td>';}
 ?>		  
 	  
 </tr>
@@ -217,26 +223,26 @@ if($set==0)
 	  
 <?php
 $set=0;	
-$time1="11:00AM";
+$time1="11am";
 for($i=0;$i<count($sched_array);$i++)
 {    if($time1 == $sched_array[$i])
-	 {echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="11:00AM"> 11.00AM </td>';
+	 {echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="11am"> 11.00am </td>';
 	 $set=$set+1;}
 }
 if($set==0)
-{echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 11.00AM </td>';}
+{echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 11.00am </td>';}
 ?>		  
 	  
 <?php
 $set=0;	
-$time1="11:30AM";
+$time1="11:30am";
 for($i=0;$i<count($sched_array);$i++)
 {    if($time1 == $sched_array[$i])
-	 {echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="11:30AM"> 11.30AM </td>';
+	 {echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="11:30am"> 11.30am </td>';
 	 $set=$set+1;}
 }
 if($set==0)
-{echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 11.30AM </td>';}
+{echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 11.30am </td>';}
 ?>	
 	  
 </tr>
@@ -253,27 +259,27 @@ if($set==0)
 	   
 	   <?php
          $set=0;	
-         $time1="12:00PM";
+         $time1="12pm";
          for($i=0;$i<count($sched_array);$i++)
            {    if($time1 == $sched_array[$i])
-	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="12:00PM"> 12.00PM </td>';
+	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="12pm"> 12.00pm </td>';
 	            $set=$set+1;}
             }
          if($set==0)
-         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 12.00PM </td>';}
+         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 12.00pm </td>';}
        ?>	
 	   
 	  
 	   <?php
          $set=0;	
-         $time1="12:30PM";
+         $time1="12:30pm";
          for($i=0;$i<count($sched_array);$i++)
            {    if($time1 == $sched_array[$i])
-	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="12:30PM"> 12.30PM </td>';
+	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="12:30pm"> 12.30pm </td>';
 	            $set=$set+1;}
             }
          if($set==0)
-         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 12.30PM </td>';}
+         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 12.30pm </td>';}
        ?>	
 	  
 	</tr>
@@ -282,54 +288,26 @@ if($set==0)
 	   
 	   <?php
          $set=0;	
-         $time1="1:00PM";
+         $time1="1pm";
          for($i=0;$i<count($sched_array);$i++)
            {    if($time1 == $sched_array[$i])
-	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="1:00PM"> 1.00PM </td>';
+	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="1pm"> 1.00pm </td>';
 	            $set=$set+1;}
             }
          if($set==0)
-         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 1.00PM </td>';}
+         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 1.00pm </td>';}
        ?>	
 	   
 	   <?php
          $set=0;	
-         $time1="1:30PM";
+         $time1="1:30pm";
          for($i=0;$i<count($sched_array);$i++)
            {    if($time1 == $sched_array[$i])
-	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="1:30PM"> 1.30PM </td>';
+	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="1:30pm"> 1.30pm </td>';
 	            $set=$set+1;}
             }
          if($set==0)
-         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 1.30PM </td>';}
-       ?>	
-	   
-	</tr>
-	
-	<tr> 
-	   
-	   <?php
-         $set=0;	
-         $time1="2:00PM";
-         for($i=0;$i<count($sched_array);$i++)
-           {    if($time1 == $sched_array[$i])
-	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="2:00PM"> 2.00PM </td>';
-	            $set=$set+1;}
-            }
-         if($set==0)
-         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 2.00PM </td>';}
-       ?>	
-	   
-	   <?php
-         $set=0;	
-         $time1="2:30PM";
-         for($i=0;$i<count($sched_array);$i++)
-           {    if($time1 == $sched_array[$i])
-	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="2:30PM"> 2.30PM </td>';
-	            $set=$set+1;}
-            }
-         if($set==0)
-         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 2.30PM </td>';}
+         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 1.30pm </td>';}
        ?>	
 	   
 	</tr>
@@ -338,26 +316,54 @@ if($set==0)
 	   
 	   <?php
          $set=0;	
-         $time1="3:00PM";
+         $time1="2pm";
          for($i=0;$i<count($sched_array);$i++)
            {    if($time1 == $sched_array[$i])
-	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="3:00PM"> 3.00PM </td>';
+	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="2pm"> 2.00pm </td>';
 	            $set=$set+1;}
             }
          if($set==0)
-         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 3.00PM </td>';}
+         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 2.00pm </td>';}
        ?>	
 	   
 	   <?php
          $set=0;	
-         $time1="3:30PM";
+         $time1="2:30pm";
          for($i=0;$i<count($sched_array);$i++)
            {    if($time1 == $sched_array[$i])
-	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="3:30PM"> 3.30PM </td>';
+	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="2:30pm"> 2.30pm </td>';
 	            $set=$set+1;}
             }
          if($set==0)
-         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 3.30PM </td>';}
+         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 2.30pm </td>';}
+       ?>	
+	   
+	</tr>
+	
+	<tr> 
+	   
+	   <?php
+         $set=0;	
+         $time1="3pm";
+         for($i=0;$i<count($sched_array);$i++)
+           {    if($time1 == $sched_array[$i])
+	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="3pm"> 3.00pm </td>';
+	            $set=$set+1;}
+            }
+         if($set==0)
+         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 3.00pm </td>';}
+       ?>	
+	   
+	   <?php
+         $set=0;	
+         $time1="3:30pm";
+         for($i=0;$i<count($sched_array);$i++)
+           {    if($time1 == $sched_array[$i])
+	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="3:30pm"> 3.30pm </td>';
+	            $set=$set+1;}
+            }
+         if($set==0)
+         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 3.30pm </td>';}
        ?>	
 	   
 	</tr>
@@ -376,26 +382,26 @@ if($set==0)
 	  
 	  <?php
          $set=0;	
-         $time1="4:00PM";
+         $time1="4pm";
          for($i=0;$i<count($sched_array);$i++)
            {    if($time1 == $sched_array[$i])
-	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="4:00PM"> 4.00PM </td>';
+	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="4pm"> 4.00pm </td>';
 	            $set=$set+1;}
             }
          if($set==0)
-         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 4.00PM </td>';}
+         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 4.00pm </td>';}
        ?>	
 	  
 	   <?php
          $set=0;	
-         $time1="4:30PM";
+         $time1="4:30pm";
          for($i=0;$i<count($sched_array);$i++)
            {    if($time1 == $sched_array[$i])
-	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="4:30PM"> 4.30PM </td>';
+	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="4:30pm"> 4.30pm </td>';
 	            $set=$set+1;}
             }
          if($set==0)
-         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 4.30PM </td>';}
+         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 4.30pm </td>';}
        ?>	
 	  
 	</tr>
@@ -404,26 +410,26 @@ if($set==0)
 	  
 	  <?php
          $set=0;	
-         $time1="5:00PM";
+         $time1="5pm";
          for($i=0;$i<count($sched_array);$i++)
            {    if($time1 == $sched_array[$i])
-	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="5:00PM"> 5.00PM </td>';
+	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="5pm"> 5.00pm </td>';
 	            $set=$set+1;}
             }
          if($set==0)
-         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 5.00PM </td>';}
+         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 5.00pm </td>';}
        ?>	
 	  
 	  <?php
          $set=0;	
-         $time1="5:30PM";
+         $time1="5:30pm";
          for($i=0;$i<count($sched_array);$i++)
            {    if($time1 == $sched_array[$i])
-	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="5:30PM"> 5.30PM </td>';
+	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="5:30pm"> 5.30pm </td>';
 	            $set=$set+1;}
             }
          if($set==0)
-         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 5.30PM </td>';}
+         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 5.30pm </td>';}
        ?>	
 	
 	</tr>
@@ -432,26 +438,26 @@ if($set==0)
 	  
 	  <?php
          $set=0;	
-         $time1="6:00PM";
+         $time1="6pm";
          for($i=0;$i<count($sched_array);$i++)
            {    if($time1 == $sched_array[$i])
-	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="6:00PM"> 6.00PM </td>';
+	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="6pm"> 6.00pm </td>';
 	            $set=$set+1;}
             }
          if($set==0)
-         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 6.00PM </td>';}
+         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 6.00pm </td>';}
        ?>	
 	  
 	   <?php
          $set=0;	
-         $time1="6:30PM";
+         $time1="6:30pm";
          for($i=0;$i<count($sched_array);$i++)
            {    if($time1 == $sched_array[$i])
-	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="6:30PM"> 6.30PM </td>';
+	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="6:30pm"> 6.30pm </td>';
 	            $set=$set+1;}
             }
          if($set==0)
-         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 6.30PM </td>';}
+         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 6.30pm </td>';}
        ?>	
 	
 	</tr>
@@ -460,26 +466,26 @@ if($set==0)
       
 	  <?php
          $set=0;	
-         $time1="7:00PM";
+         $time1="7pm";
          for($i=0;$i<count($sched_array);$i++)
            {    if($time1 == $sched_array[$i])
-	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="7:00PM"> 7.00PM </td>';
+	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="7pm"> 7.00pm </td>';
 	            $set=$set+1;}
             }
          if($set==0)
-         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 7.00PM </td>';}
+         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 7.00pm </td>';}
        ?>	
 	  
 	  <?php
          $set=0;	
-         $time1="7:30PM";
+         $time1="7:30pm";
          for($i=0;$i<count($sched_array);$i++)
            {    if($time1 == $sched_array[$i])
-	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="7:30PM"> 7.30PM </td>';
+	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="7:30pm"> 7.30pm </td>';
 	            $set=$set+1;}
             }
          if($set==0)
-         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 7.30PM </td>';}
+         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 7.30pm </td>';}
        ?>	
 	
 	</tr>
@@ -497,26 +503,26 @@ if($set==0)
 	   
 	   <?php
          $set=0;	
-         $time1="8:00PM";
+         $time1="8pm";
          for($i=0;$i<count($sched_array);$i++)
            {    if($time1 == $sched_array[$i])
-	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="8:00PM"> 8.00PM </td>';
+	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="8pm"> 8.00pm </td>';
 	            $set=$set+1;}
             }
          if($set==0)
-         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 8.00PM </td>';}
+         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 8.00pm </td>';}
        ?>	
 	   
 	   <?php
          $set=0;	
-         $time1="8:30PM";
+         $time1="8:30pm";
          for($i=0;$i<count($sched_array);$i++)
            {    if($time1 == $sched_array[$i])
-	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="8:30PM"> 8.30PM </td>';
+	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="8:30pm"> 8.30pm </td>';
 	            $set=$set+1;}
             }
          if($set==0)
-         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 8.30PM </td>';}
+         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 8.30pm </td>';}
        ?>	
 	
 	</tr>
@@ -524,26 +530,26 @@ if($set==0)
 	   
 	   <?php
          $set=0;	
-         $time1="9:00PM";
+         $time1="9pm";
          for($i=0;$i<count($sched_array);$i++)
            {    if($time1 == $sched_array[$i])
-	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="9:00PM"> 9.00PM </td>';
+	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="9pm"> 9.00pm </td>';
 	            $set=$set+1;}
             }
          if($set==0)
-         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 9.00PM </td>';}
+         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike> 9.00pm </td>';}
        ?>	
 	   
 	   <?php
          $set=0;	
-         $time1="9:30PM";
+         $time1="9:30pm";
          for($i=0;$i<count($sched_array);$i++)
            {    if($time1 == $sched_array[$i])
-	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="9:30PM"> 9.30PM </td>';
+	        {    echo'  <td style="color:green; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" value="9:30pm"> 9.30pm </td>';
 	            $set=$set+1;}
             }
          if($set==0)
-         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike><strike> 9.30PM </td>';}
+         {echo'<td style="color:red; text-align:left;width=50%"> <input type="radio" name="app_time" id="app_time" disabled ><strike><strike> 9.30pm </td>';}
        ?>	  
 	  			
 	

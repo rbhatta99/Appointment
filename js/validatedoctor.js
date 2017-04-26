@@ -33,7 +33,44 @@ $(document).ready(function(){
 	$("#hospital").SumoSelect({
 
 		search: true,
-		searchText:'Search Hospital'
+		searchText: 'Search'
+			
+		
+	});
+
+	$("#sched_weekdstart").SumoSelect({
+		placeholder:'Start Time',
+		up:true
+		
+	});
+
+	$("#sched_weekdend").SumoSelect({
+		up:true,
+		placeholder: 'End Time'
+		
+	});
+
+	$("#sched_satstart").SumoSelect({
+		up:true,
+		placeholder: 'Start Time'
+		
+	});
+
+	$("#sched_satend").SumoSelect({
+		up:true,
+		placeholder: 'End Time'
+		
+	});
+	
+	$("#sched_sunstart").SumoSelect({
+		up:true,
+		placeholder: 'Start Time'
+		
+	});
+	$("#sched_sunend").SumoSelect({
+		up:true,
+		placeholder: 'End Time'
+		
 	});
 
 	$('select#degree').on('sumo:closed', function(sumo) {

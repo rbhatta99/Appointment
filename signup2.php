@@ -281,27 +281,87 @@ $sqlhospital="select * from hospitalinfo";
 							<div class='sidetip'>Enter your license number.</div>
 							<input type='text' name='licenseno' required='required'/>
 						</div>
-				</div>
-				<div class='sched_wday'>
+				</div>";
+				$time=halfHourTimes();
+
+							// print_r($time);
+				echo "<div class='sched_wday'>
 					<div class='fieldname'>Weekday Schedule</div>
 					<div class='holding'>
-						<div class='sidetip'>working hours during weekdays!</div>
-						<input type='text' name='sched_wday' value='' required='required' />
+						<div class='sidetip'>working hours during weekdays</div>
+						<select name='sched_weekdstart' id='sched_weekdstart'>";
+						
+
+						for($i=15;$i<=42;$i++)
+						{
+							echo "<option value=".$time[$i].">".$time[$i]."</option>";
+						}
+
+						echo "</select>
+						<select name='sched_weekdend' id='sched_weekdend'>";
+						
+
+
+						for($i=15;$i<=42;$i++)
+						{
+							echo "<option value=".$time[$i].">".$time[$i]."</option>";
+						}
+
+						echo"</select> 
+						
 					</div>
 				</div>
 				<div class='sched_sat'>
-					<div class='fieldname'>Saturday Schedule</div>
+				<div class='fieldname'>Saturday Schedule</div>
 					<div class='holding'>
-						<div class='sidetip'>When are you availabe on saturdays?</div>
-						<input type='text' name='sched_sat' value='' required='required'> 
+						<div class='sidetip'>working hours on Saturday</div>
+						<select name='sched_satstart' id='sched_satstart'>";
+						
+
+						for($i=15;$i<=42;$i++)
+						{
+							echo "<option value=".$time[$i].">".$time[$i]."</option>";
+						}
+
+						echo "</select>
+						<select name='sched_satend' id='sched_satend'>";
+						
+
+
+						for($i=15;$i<=42;$i++)
+						{
+							echo "<option value=".$time[$i].">".$time[$i]."</option>";
+						}
+
+						echo"</select> 
+						
 					</div>
 				</div>
 				<div class='sched_sun'>
 					<div class='fieldname'>Sunday Schedule</div>
 					<div class='holding'>
-						<div class='sidetip'>When are you availabe on sundays?</div>
-						</div>
-						<input type='text' name='sched_sun' value='' required='required'> 
+						<div class='sidetip'>working hours during weekdays</div>
+						<select name='sched_sunstart' id='sched_sunstart'>";
+						
+
+						for($i=15;$i<=42;$i++)
+						{
+							echo "<option value=".$time[$i].">".$time[$i]."</option>";
+						}
+
+						echo "</select>
+						<select name='sched_sunend' id='sched_sunend'>";
+						
+
+
+						for($i=15;$i<=42;$i++)
+						{
+							echo "<option value=".$time[$i].">".$time[$i]."</option>";
+						}
+
+						echo"</select> 
+						
+					</div> 
 					
 				</div>
 				
@@ -324,4 +384,22 @@ $sqlhospital="select * from hospitalinfo";
 			
 			";
 		}
+
+
+
+
+		function halfHourTimes() {
+  			$formatter = function ($time) {
+    		if ($time % 3600 == 0) {
+      		return date('ga', $time);
+    		} else {
+      		return date('g:ia', $time);
+   			 }
+  			};
+  			$halfHourSteps = range(0, 47*1800, 1800);
+  			return array_map($formatter, $halfHourSteps);
+}
+
+
+
 	?>

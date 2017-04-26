@@ -65,9 +65,31 @@ require "dbconnect.php"
 	$doctor_contactnum = $_POST['contactNum'];
 	$doctor_licenseno=$_POST['licenseno'];
 	// $doctor_rstatus='approved';
+	$doctor_weekd_start=$_POST['sched_weekdstart'];
+	$doctor_weekd_end=$_POST['sched_weekdend'];
+	$doctor_sat_start=$_POST['sched_satstart'];
+	$doctor_sat_end=$_POST['sched_satend'];
+	$doctor_sun_start=$_POST['sched_sunstart'];
+	$doctor_sun_end=$_POST['sched_sunend'];
+
+	$weekdaylist=halfHourTimes($doctor_weekd_start,$doctor_weekd_end);
+
+	$satdaylist=halfHourTimes($doctor_sat_start,$doctor_sat_end);
+	
+	$sundaylist=halfHourTimes($doctor_sun_start,$doctor_sun_end);
+
 	$a=0;
 	$ctr=0;
-	
+	// echo "Weekday:<br/>";
+	// print_r($weekdaylist);
+	// echo "<br>";
+
+	// echo "Saturday:<br/>";
+	// print_r($satdaylist);
+// echo "<br>";
+	// echo "sunday:<br/>";
+	// print_r($sundaylist);
+	// echo "<br>";
 		
 	//$patient_username = str_ireplace(' ', '_', strtolower($patient_username));
 	/*$patient_password = str_ireplace(' ', '_', strtolower($patient_password));
@@ -127,7 +149,31 @@ require "dbconnect.php"
 	// doctor_licenseno
 	if ($a==0){
 		$docinsert = "insert into doctor  values
-			('{$doctor_username}','{$doctor_password}','{$doctor_email}','{$doctor_lname}','{$doctor_fname}','{$doctor_mname}','{$doctor_special}','{$doctor_hospital}','{$doctor_contactnum}','n',{$doctor_licenseno});";		
+			('{$doctor_username}','{$doctor_password}','{$doctor_email}','{$doctor_lname}','{$doctor_fname}','{$doctor_mname}','{$doctor_special}','{$doctor_hospital}','{$doctor_contactnum}','n',{$doctor_licenseno});";
+
+		$docinsertweekday="insert into availability_weekday values ";
+			foreach($weekdaylist as $list1){
+
+		$docinsertweekday.="('".$doctor_username."','".$list1."')";
+		if(next($weekdaylist)==true) $docinsertweekday.=",";
+		}
+
+		// $docinsertsaturday
+		$docinsertsaturday="insert into availability_saturday values ";
+			foreach($satdaylist as $list2){
+
+		$docinsertsaturday.="('".$doctor_username."','".$list2."')";
+		if(next($satdaylist)==true) $docinsertsaturday.=",";
+		}
+		// $docinsertsunday
+		$docinsertsunday="insert into availability_sunday values ";
+			foreach($sundaylist as $list3){
+
+		$docinsertsunday.="('".$doctor_username."','".$list3."')";
+		if(next($sundaylist)==true) $docinsertsunday.=",";
+		}
+
+
 		
 				$result = mysqli_query($conn,$docinsert); 		
 				if (!$result) { 
@@ -137,6 +183,10 @@ require "dbconnect.php"
 					exit(); 
 				} 
 				else{
+					mysqli_query($conn,$docinsertweekday) or trigger_error(mysqli_error($conn));
+					mysqli_query($conn,$docinsertsaturday) or trigger_error(mysqli_error($conn));
+					mysqli_query($conn,$docinsertsunday) or trigger_error(mysqli_error($conn));
+
 					echo "Doctor successfully added. . Thank you. <br/>";
 					}
 			
@@ -147,6 +197,87 @@ require "dbconnect.php"
 		
 	}
 	mysqli_close($conn);
+
+
+		function halfHourTimes($start,$end) {
+			// echo "Start:".$start."<br>End:".$end."<br>";
+  			if(strpos($start,"am")!=false){
+  				// echo "Inside start if"."<br>";
+  				$starttime=substr($start, 0,strpos($start,"am"));
+  				// echo $starttime."<br>";
+  				if(strpos($start,":")!=false){
+  					// echo "inside explode";
+  				$starttimetot=explode(":",$starttime);
+  				$starttimsec=(int)($starttimetot[0])*3600 + (int)($starttimetot[1])*60;
+  				}
+  				else
+  				$starttimsec=(int)($starttime)*3600;	
+  				//$starttime=date_parse($starttime);
+  				//print_r($starttime);
+  				
+  				// echo $starttimsec."<br>";
+
+  			}
+  			else 
+  			{
+  				// echo "Inside start else"."<br>";
+  				$starttime=substr($start, 0,strpos($start,"pm"));
+  				// echo "Rohit TEst:".$starttime."<br>";
+  				if(strpos($start,":")!=false){
+  					// echo "inside explode";
+  				$starttimetot=explode(":",$starttime);
+  				$starttimsec=(int)($starttimetot[0])*3600+ 11*3600+ (int)($starttimetot[1])*60;
+  				}
+  				else
+  				$starttimsec=(int)($starttime)*3600+(11*3600);
+
+  				// echo $starttimsec."<br/>";
+  			}	
+
+
+  			if(strpos($end,"am")!=false){
+  				// echo "Inside end if"."<br>";
+  				$endtime=substr($end, 0,strpos($end,"am"));
+  				if(strpos($end,":")!=false){
+  				$endtimetot=explode(":",$endtime);
+  				$endtimsec=(int)($endtimetot[0])*3600+ (int)($endtimetot[1])*60;
+  				}
+  				else
+  				$endtimsec=(int)($endtime)*3600;
+
+  				// echo $endtimsec."<br/>";
+  			}
+  			else 
+  			{
+  				// echo "Inside end else"."<br>";
+  				$endtime=substr($end, 0,strpos($end,"pm"));
+  				// echo "Rohit Bhattacharjee".$endtime."<br>";
+  				if(strpos($start,":")!=false){
+  				$endtimetot=explode(":",$endtime);
+  				$endtimsec=(int)($endtimetot[0])*3600+ 11*3600 + (int)($endtimetot[1])*60;
+  				}
+  				else
+  				$endtimsec=(int)($endtime)*3600 + 11*3600;
+
+  				// echo $endtimsec."<br/>";
+  			}	
+  			$formatter = function ($time) {
+    		if ($time % 3600 == 0) {
+      		return date('ga', $time);
+    		} else {
+      		return date('g:ia', $time);
+   			 }
+  			};
+
+  			if($starttimsec/3600>=23 && $starttimsec/3600<=24 )
+  				$starttimsec=$starttimsec-12*3600;
+  			if($endtimsec/3600>=23 && $endtimsec/3600<=24 )
+  				$endtimsec=$endtimsec-12*3600;
+
+  			$halfHourSteps = range($starttimsec, $endtimsec, 1800);
+  			return array_map($formatter, $halfHourSteps);
+}
+
 	
 ?>
 </div>
