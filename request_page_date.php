@@ -61,17 +61,19 @@ $year=date("Y");
 				/*Display doctor's name and specialization*/
 				$doctor_user = $_POST['doctor_user'];
 				$_SESSION['docuser']=$doctor_user;
+
+
 				
-				$doctor_query = mysqli_query($conn,"SELECT doctor_lname, doctor_fname, doctor_specialization,doctor_hospital
-				                                 FROM doctor WHERE doctor_username='$doctor_user'");
+				$doctor_query = mysqli_query($conn,"SELECT doctor_lname, doctor_fname, s.Name as sname,h.name as hname
+				                                 FROM doctor d,specializationinfo s, hospitalinfo h WHERE s.SpecializationID=doctor_specialization and doctor_hospital=h.HospitalID and doctor_username='$doctor_user'") ;
 				$doctor_result = mysqli_fetch_array($doctor_query);
 				echo "<br/><br/><br/>";				
 				echo "Doctor Details";
-				echo '<p>' .'Name:'. $doctor_result[1] . ' ' . $doctor_result[0] . ' <br/>' ;				
-                echo 'Specialisation:'. $doctor_result[2] . ' <br/>' ;
-                echo 'Hospital:'. $doctor_result[3] . ' <br/>' ;	
+				echo '<p>' .'Name:'. $doctor_result['doctor_fname'] . ' ' . $doctor_result['doctor_lname'] . ' <br/>' ;				
+                echo 'Specialisation:'. $doctor_result['sname'] . ' <br/>' ;
+                echo 'Hospital:'. $doctor_result['hname'] . ' <br/>' ;	
 				echo "Please select date for Appointment";	
-
+				mysqli_error($conn);
    				/*Display date picker and 'Add Time' button*/
 	//			echo '<form action="request_page_time.php" method="post">
 	//					<input type="date" name="app_date" value="' . date('Y-m-d') . '" min="' . date('Y-m-d') . '"/>

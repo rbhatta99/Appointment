@@ -78,7 +78,7 @@
 				$doctor_special = $row['doctor_specialization'];
                 /*       */				
 
-
+                echo '<input type="hidden" name="doctor_user" value="'.$doctor_user.'">';
 	
 					/*$count = count($row);
 					$doctor_name = "";
@@ -111,10 +111,16 @@
 					        <td style="width: 85px;height:85px"><img src="'.$a.'" style="width:100%;height:100%;"></td>
 							<td style="width: 250px">' . $doctor_names . '</td>
 							<td style="width: 250px">' . $doctor_special . '</td>
-							<td style="width: 250px"><center><input style="width: 100px" type="submit" name="doctor_user" value="'. $doctor_user .'"/></center></td>
-						</tr>';
+							<td style="width: 250px"><center><input style="width: 100px" type="submit" value="Request"/></center></td>
+
+						</tr>
+
+						';
+
 				}
-				echo '</table></form>';
+				echo '</table>
+
+				</form>';
 					
 				mysqli_close($conn);
 			?>

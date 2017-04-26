@@ -1,3 +1,6 @@
+<?php 
+require "dbconnect.php";
+?>
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="CSS/dboardCSS.css">
@@ -50,57 +53,65 @@
 			<div class="content_main">
 		<?php
 			//inputs from the user
-			$input = $_POST['searchinput'];
-			$type = $_POST['searchtype'];
-
+			$sInput = $_POST['searchinput'];
+			$sType = $_POST['searchtype'];
+			echo $sType;
+			$field;
+			$resultCheck;
 			//connecting to database
-			$conn = pg_connect('host=localhost dbname=healthcare user=postgres password=user');
+			// $conn = pg_connect('host=localhost dbname=healthcare user=postgres password=user');
 			
 			//type names on the databse is all on lower case so we need to set all the inputs to lower case.
-			$sInput = str_ireplace(' ', '_', strtolower($input));
-			$sType = str_ireplace(' ', '_', strtolower($type));
+			// $sInput = str_ireplace(' ', '_', strtolower($input));
+			// $sType = str_ireplace(' ', '_', strtolower($type));
 			
-			if($sType == 'specialty'){
-				$field = 'doctor_specialization';
-			}else if($sType == 'hospital'){
-				$field = 'doctor_hospital';
-			}else if($sType == 'name'){
+			if($sType == 'Specialty'){
+				$field = 's.Name';
+			}else if($sType == 'Hospital'){
+				$field = 'h.Name';
+			}else if($sType == 'Name'){
 				$field = 'name';
 			}		
 			
-			for($i=0; $i<10; $i++){
+			//for($i=0; $i<10; $i++){
 				//searching for column name
-				if($field == 'doctor_specialization'){
-					$resultCheck = pg_query($conn, "select * from doctor where ".$field." like '".$sInput."%' ");
-					break;
-				}else if($field == 'name'){
-					$resultCheck = pg_query($conn, "select * from doctor where doctor_lname like '".$sInput."%' or doctor_fname like '".$sInput."%' or doctor_mname like '".$sInput."%'");
-					break;
-				}else if($field == 'doctor_hospital'){
-					$resultCheck = pg_query($conn, "select * from doctor where ".$field." like '".$sInput."%' ");
-					break;
-				}else{
-					break;
+				if($sType == 'Specialty'){
+				$resultCheck = mysqli_query($conn, "select doctor_username,doctor_fname,doctor_lname,doctor_mname,s.Name as sname,h.Name as hname from doctor d,specializationinfo s,hospitalinfo h where d.doctor_specialization=SpecializationID and h.HospitalID=doctor_hospital and  ".$field." like '%".$sInput."%' ") or die(mysqli_error($conn));
+				// echo $resultCheck;
+					// break;
+				}else if($sType == 'Name'){
+					$resultCheck = mysqli_query($conn, "select doctor_username,doctor_fname,doctor_lname,doctor_mname,s.name as sname,h.name as hname from doctor d,specializationinfo s,hospitalinfo h where d.doctor_specialization=SpecializationID and h.HospitalID=doctor_hospital and doctor_lname like '%".$sInput."%' or doctor_fname like '%".$sInput."%' or doctor_mname like '%".$sInput."%'");
+					// break;
+				}else if($sType == 'Hospital'){
+					$resultCheck = mysqli_query($conn, "select doctor_username,doctor_fname,doctor_lname,doctor_mname,s.Name as sname,h.Name as hname from doctor d,specializationinfo s,hospitalinfo h where d.doctor_specialization=SpecializationID and h.HospitalID=doctor_hospital and ".$field." like '%".$sInput."%' ") or die(mysqli_error($conn));
+					// break;
 				}
-			}
 			
-			$rows = pg_num_rows($resultCheck);
+			
+			$rows = mysqli_num_rows($resultCheck);
 			
 			if($rows==0){
 				echo "No ".$sInput." existing on ".$sType." list.";
 				//echo $field;
 			}else if($rows!=0){
 				echo 'Found! <br />';
+				echo '<form action="request_page_date.php" method="POST">';
+				echo "<table border=0><tr><th>Name</th><th>Specialization</th><th>Hospital</th></tr>";
 				for($j=0; $j<$rows; $j++){
-					$tuple=pg_fetch_array($resultCheck);
-					echo 'Name: ', $tuple['doctor_fname'],' ', $tuple['doctor_mname'] ,' ', $tuple['doctor_lname'], '<br />';
-					echo 'Specialization: ', $tuple['doctor_specialization'], '<br />';
-					echo 'Location/Hospital: ', $tuple['doctor_hospital'], '<br />';
-					echo '<br />';
+					$tuple=mysqli_fetch_array($resultCheck);
+					echo '<input type="hidden" name="doctor_user" value="'.$tuple['doctor_username'].'">';
+					echo '<tr><td>', $tuple['doctor_fname'],' ', $tuple['doctor_mname'] ,' ', $tuple['doctor_lname'], '</td>';
+					echo '<td>', $tuple['sname'], '</td>';
+					echo '<td>', $tuple['hname'], '</td>';
+					echo '<td><input type="submit" value="Request Appointment"></td>';
+					echo '</tr>';
+					
+
 				}
+				echo "</table>";
 			}
 					
-			pg_close($conn);
+			mysqli_close($conn);
 		?>
 		</div>
 		</div>
