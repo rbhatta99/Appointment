@@ -1,8 +1,8 @@
 <?php
-
+	require "../dbconnect.php";
 	include('time_checker.php');
 	
-	session_start();
+	// session_start();
 	$username = $_SESSION['username'];
 ?>
 
@@ -51,13 +51,13 @@
 <?php	
 	//$conn = mysqli_connect('host=localhost dbname=healthcare user=postgres password=user');
 				
-	$conn=mysqli_connect("localhost","root","root")or die("can not connect");
-	mysqli_select_db("healthcare",$conn) or die("can not select database");
+	// $conn=mysqli_connect("localhost","root","root")or die("can not connect");
+	// mysqli_select_db("healthcare",$conn) or die("can not select database");
 	
 		
-	$query = "SELECT app_doctorname, app_number, app_patientname, app_date, app_time, app_hospital, app_status FROM appointment WHERE app_doctorusername='$username' ORDER BY app_number";
+	$query = "SELECT app_doctorname, app_number, app_patientname, app_date, app_time, app_hospital, app_status FROM appointment ORDER BY app_number";
 
-	$result = mysqli_query($query,$conn);
+	$result = mysqli_query($conn,$query);
 				
 	echo '<div class = "present_appointments">';
 	echo "<b>Present Appointments</b>";
@@ -115,7 +115,7 @@
 							<form action="cancel_apprequest.php" method="post">';
 								
 							/*Get time difference in minutes*/
-							$timestamp_query = mysqli_query("SELECT app_date, app_time FROM appointment WHERE app_number='$tableID'");
+							$timestamp_query = mysqli_query($conn,"SELECT app_date, app_time FROM appointment WHERE app_number='$tableID'");
 							$timestamp_array = mysqli_fetch_array($timestamp_query);
 							$time_difference = check_time($timestamp_array[0], $timestamp_array[1]);
 								

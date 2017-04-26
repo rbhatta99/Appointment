@@ -83,7 +83,7 @@ require "dbconnect.php";
 							
 						</form>
 					</div>
-					 <div class="front-signup">
+					 <!-- <div class="front-signup">
 						<h2>
 							<strong>No account yet?</strong>
 							Sign Up Please
@@ -92,26 +92,26 @@ require "dbconnect.php";
 								<option value="doctor">Doctor</option>
 								<option value="patient">Patient</option>
 							</select>   -->
-						</h2>
+					<!--</h2>
 						
 						
 							<div class="placeholding-input">
 								<input type="text" id="signup-user-name" class="text-input" name="uname" placeholder="Username">
 								<!--label for="signup-user-name" class="placeholder">Username</label-->
-							</div>
+							<!--</div>
 							<div class="placeholding-input">
 								<input type="text" id="signup-user-email" class="text-input" name="eadd" placeholder="Email">
 								<!--label for="signup-user-email" class="placeholder">Email</label-->
-							</div>
+							<!--</div>
 							<div class="placeholding-input">
 								<input type="password" id="signup-user-password" class="text-input" name="pword" placeholder="password">
 								<!--label for="signup-user-password" class="placeholder">Password</label-->
-							</div>
+							<!--</div>
 							<input type="hidden" name="signup_option" value="doctor">
 							<button type="submit" class="btn signup-btn">Sign up for HCS</button>
 						</form>
 						
-					 </div>
+					 </div> -->
 						
 					</div>
 					<div class="footer">
@@ -130,7 +130,7 @@ require "dbconnect.php";
 </body>
 
 	<?php
-	require "dbconnect.php";
+	//require "dbconnect.php";
 	//session_start();
 	//if ($_SESSION['login']==0){
 

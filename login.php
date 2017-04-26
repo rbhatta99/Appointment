@@ -61,9 +61,9 @@
 				echo "Account still pending";
 			}
 		}else if($d!=0){
-			$result = mysqli_query($conn,"select doctor_rstatus from doctor where doctor_username='{$username}'");
+			$result = mysqli_query($conn,"select doctor_deleted from doctor where doctor_username='{$username}'");
 			$status = mysqli_fetch_row($result);
-			if($status[0] == "approved"){
+			if($status[0] == "n"){
 				$_SESSION["login"] = 2;
 				$result = mysqli_query($conn,"select doctor_fname from doctor where doctor_username='{$username}'");
 				$name = mysqli_fetch_row($result);
@@ -74,7 +74,7 @@
 				exit;
 			}
 			else{
-				echo "Account still pending";
+				echo "Account Deleted, please contact the administrator";
 			}
 		}
 		mysqli_close($conn);

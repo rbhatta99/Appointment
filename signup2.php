@@ -4,10 +4,10 @@
 
 $sqldegree="select * from degreeinfo";
 $sqlspecial="select * from specializationinfo";
-
+$sqlhospital="select * from hospitalinfo";
 	$resultdegree=mysqli_query($conn,$sqldegree);
-$resultspecial=mysqli_query($conn,$sqlspecial);
-	
+	$resultspecial=mysqli_query($conn,$sqlspecial);
+	$resulthospital=mysqli_query($conn,$sqlhospital);
 	
 	
 	
@@ -196,7 +196,7 @@ $resultspecial=mysqli_query($conn,$sqlspecial);
 								Doctor Registration
 							</h1>
 							<div id='form-content'>
-							<form action='process_signup_patient.php' method='post'>
+							<form action='process_signup_doctor.php' method='post'>
 								
 								<fieldset class='textbox'>		
 				<div class='username'>
@@ -229,7 +229,7 @@ $resultspecial=mysqli_query($conn,$sqlspecial);
 						<div class='sidetip-lname'>Enter your first name.</div>
 							<input class='fname' type='text' name='fName' placeholder='First name' required='required'> 
 						<div class='sidetip-mname'>Enter your middle name.</div>
-							<input class='mname' type='text' name='mName' placeholder='Middle name' required='required'> 
+							<input class='mname' type='text' name='mName' placeholder='Middle name' > 
 						
 					</div>
 				</div>
@@ -237,7 +237,7 @@ $resultspecial=mysqli_query($conn,$sqlspecial);
 					<div class='fieldname'>Specialization</div>
 					<div class='holding'>
 						<div class='sidetip'>What have you specialized in?</div>
-							<select id='specialization' name='specialization' multiple='multiple'>
+							<select id='specialization' name='specialization' >
 								";
 
 							while($rws=mysqli_fetch_array($resultspecial)){
@@ -255,22 +255,25 @@ $resultspecial=mysqli_query($conn,$sqlspecial);
 					<div class='fieldname'>Hospital</div>
 					<div class='holding'>
 						<div class='sidetip'>Where do you work?</div>
-							<input type='text' name='hospital' value='' />
-					</div>
+							<select id='hospital' name='hospital'>
+							";	
+							while($rws=mysqli_fetch_array($resulthospital)){
+								echo"
+								<option value='".$rws['HospitalID']."'>".$rws['Name']."</option>
+								";
+
+							}							
+					
+
+					echo "</select></div>
 				</div>
+
 				<div class='contact'>
 					<div class='fieldname'>Contact Information</div>
 					<div class='holding'>
 						<div class='sidetip'>What is your contact number?</div>
 						<input type='text' name='contactNum' value='' required='required' />
 					</div>
-				</div>
-				<div class='rstatus'>
-					<div class='fieldname'>Rstatus</div>
-						<div class='holding'>
-							<div class='sidetip'>What is your rstatus?</div>
-								<input type='text' name='rstatus' required='required' />
-						</div>
 				</div>
 				<div class='licenseno'>
 					<div class='fieldname'>License Number</div>

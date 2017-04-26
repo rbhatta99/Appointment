@@ -30,6 +30,11 @@ $(document).ready(function(){
 		search: true, 
 		searchText: 'Search',
 		selectAll: true });
+	$("#hospital").SumoSelect({
+
+		search: true,
+		searchText:'Search Hospital'
+	});
 
 	$('select#degree').on('sumo:closed', function(sumo) {
    // Do stuff here

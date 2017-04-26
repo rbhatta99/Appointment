@@ -1,5 +1,5 @@
 <?php 
-require "../dbconnect.php";
+require "dbconnect.php";
 ?>
 <html>
 	<head>
@@ -11,10 +11,10 @@ require "../dbconnect.php";
 		<div id = "menu_container">
 		<div id="menu_wrapper">
 			<ul class = "main_menu_left">
-					<li><a class="top_menu" href = "AdminDoclist.php">Doctors</a></li>
+					<li><a class="top_menu" href = "doctor_selection.php">Doctors</a></li>
 					<li><a class="top_menu" href = "AdminPatient.php">Profile</a></li>
 					<li><a class="top_menu" href = "AdminHospital.php">Hospitals</a></li>
-					<li><a class="top_menu" href = "appointments_patient.php">Appointment</a></li>
+					<li><a class="top_menu" href = "current_appointments.php">Appointment</a></li>
 					<!--li><a class="top_menu" href = "#">Settings</a></li-->
 				</ul>
 			
@@ -42,13 +42,11 @@ require "../dbconnect.php";
 				$j=0;
 				$action;
 				
-				//$conn = pg_connect('host=localhost dbname=healthcare user=postgres password=user');
-				
 				$query1 = "select doctor_username, doctor_email, doctor_lname, doctor_fname, doctor_mname, doctor_licenseno from doctor;"; 
 				$result1 = mysqli_query($conn,$query1);
 				
 				$query2 = "select patient_username, patient_eadd, patient_lname, patient_fname, patient_mname from patient ;"; 
-				$result2 = mysql_query($conn,$query2);
+				$result2 = mysqli_query($conn,$query2);
 				
 				if (!$result1 || !$result2) { 
 						echo "Problem with query " . $query1 . "<br/>"; 
@@ -62,7 +60,7 @@ require "../dbconnect.php";
 				echo "<h1>REGISTRATION REQUESTS OF DOCTORS</h1>";
 				echo "<table class='table_doctors' >";
 				echo "<tr><td><b>Username</b></td><td><b>Email Add</b></td><td><b>Lastname</b></td><td><b>First Name</b></td><td><b>Middle Name</b></td><td><b>License No.</b></td><td span='2'><b>Action</b></td></tr>";
-				while($myrow1 = pg_fetch_assoc($result1)){
+				while($myrow1 = mysqli_fetch_array($result1)){
 					echo "<tr class='table_doctors_row'>";
 					echo "<td>".htmlspecialchars($myrow1['doctor_username'])."</td>";
 					echo "<td>".htmlspecialchars($myrow1['doctor_email'])."</td>";
@@ -77,7 +75,7 @@ require "../dbconnect.php";
 				echo "<h1>REGISTRATION REQUESTS OF PATIENTS</h1>";
 				echo "<table class='table_patients'>";
 				echo "<tr class='table_patients_row'><td><b>Username</b></td><td><b>Email Add</b></td><td><b>Lastname</b></td><td><b>First Name</b></td><td><b>Middle Name</b></td><td span='2'><b>Action</b></td></tr>";
-				while($myrow2 = pg_fetch_assoc($result2)){
+				while($myrow2 = mysqli_fetch_array($result2)){
 					echo "<tr>";
 					echo "<td>".htmlspecialchars($myrow2['patient_username'])."</td>";
 					echo "<td>".htmlspecialchars($myrow2['patient_eadd'])."</td>";
@@ -90,7 +88,7 @@ require "../dbconnect.php";
 				//echo"</center>";
 				echo"</form>";
 				
-				pg_close($conn);
+				mysqli_close($conn);
 			?>
 				</div>
 			</div>

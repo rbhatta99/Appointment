@@ -44,30 +44,27 @@ require "dbconnect.php"
 			<div class="content_main">
 <?php
 
-    $characters='0123456789';
-	$string='';
-	for($i=0;$i<6;$i++)
-	{
-	$string .=$characters[rand(0,strlen($characters)-1)];
-	}
-	$patientid=$string;
+    // $characters='0123456789';
+	// $string='';
+	// for($i=0;$i<6;$i++)
+	// {
+	// $string .=$characters[rand(0,strlen($characters)-1)];
+	// }
+	// $patientid=$string;
 
-	$patient_username = $_POST['username'];
-	$patient_password = md5($_POST['password']);
-	$patient_eadd = $_POST['eadd'];
-	$patient_lname = $_POST['lName'];
-	$patient_fname = $_POST['fName'];
-	$patient_mname = $_POST['mName'];
-	$patient_sickness = $_POST['sickness'];
-	$patient_age = $_POST['age'];
-	$patient_bdate = date("Y-m-d", strtotime($_POST['bdate']));
-	$patient_gender = $_POST['gender'];
-	$patient_height = $_POST['height'];
-	$patient_weight = $_POST['weight'];
-	$patient_status = $_POST['status'];
-	$patient_address = $_POST['address'];
-	$patient_contactnum = $_POST['contactNum'];
-	$patient_rstatus='approved';
+	$doctor_username = $_POST['username'];
+	$doctor_password = md5($_POST['password']);
+	$doctor_email = $_POST['eadd'];
+	$doctor_lname = $_POST['lName'];
+	$doctor_fname = $_POST['fName'];
+	$doctor_mname = $_POST['mName'];
+	$doctor_special= $_POST['specialization'];
+	$doctor_hospital=$_POST['hospital'];
+	// $doctor_sickness = $_POST['sickness'];
+	// $doctor_age = $_POST['age'];
+	$doctor_contactnum = $_POST['contactNum'];
+	$doctor_licenseno=$_POST['licenseno'];
+	// $doctor_rstatus='approved';
 	$a=0;
 	$ctr=0;
 	
@@ -95,16 +92,7 @@ require "dbconnect.php"
 	
 	
 
-	$patient_eadd =$patient_eadd;
-	$patient_sickness = $patient_sickness;
-	$patient_age =$patient_age;
-	$patient_bdate =$patient_bdate;
-	$patient_gender =$patient_gender;
-	$patient_height =$patient_height;
-	$patient_weight = $patient_weight;
-	$patient_status = $patient_status;
-	$patient_address =$patient_address;
-	$patient_contactnum = $patient_contactnum;	
+	
 	
 	
 	//$conn = pg_connect('host=localhost dbname=healthcare user=postgres password=user');
@@ -113,10 +101,10 @@ require "dbconnect.php"
 	// mysqli_select_db("healthcare",$conn) or die("can not select database");
 	
 		
-	$queryCheck1 = "select patient_username from patient where patient_username='{$patient_username}';";
+	$queryCheck1 = "select patient_username from patient where patient_username='{$doctor_username}';";
 	$resultCheck1 = mysqli_query($conn,$queryCheck1) or die("wrong query");
 	
-	$queryCheck2 = "select doctor_username from doctor where doctor_username='{$patient_username}';";
+	$queryCheck2 = "select doctor_username from doctor where doctor_username='{$doctor_username}';";
 	$resultCheck2 = mysqli_query($conn,$queryCheck2) or die("wrong query");
 	
 	while($myrow1 = mysqli_fetch_assoc($resultCheck1)) {
@@ -125,20 +113,31 @@ require "dbconnect.php"
 	while($myrow2 = mysqli_fetch_assoc($resultCheck2)) {
 			$a=$a+1;
 	}
-	echo $a;
+	// echo $a;
+
+	// doctor_username
+	// doctor_password 	
+	// doctor_email  	
+	// doctor_lname 	 	
+	// doctor_fname 	 	
+	// doctor_mname 	
+	// doctor_specialization 	
+	// doctor_hospitalIndex 	 	
+	// contactno 	
+	// doctor_licenseno
 	if ($a==0){
-		$query = "insert into patient (patient_id,patient_username, patient_password, patient_eadd, patient_lname, patient_fname, patient_mname, patient_sickness, patient_age, patient_birthdate, patient_gender, patient_height, patient_weight, patient_status, patient_address, patient_contactno, patient_rstatus) values
-			('{$patientid}','{$patient_username}','{$patient_password}','{$patient_eadd}','{$patient_lname}','{$patient_fname}','{$patient_mname}','{$patient_sickness}','{$patient_age}',
-			'{$patient_bdate}','{$patient_gender}','{$patient_height}','{$patient_weight}','{$patient_status}','{$patient_address}','{$patient_contactnum}','{$patient_rstatus}');";		
+		$docinsert = "insert into doctor  values
+			('{$doctor_username}','{$doctor_password}','{$doctor_email}','{$doctor_lname}','{$doctor_fname}','{$doctor_mname}','{$doctor_special}','{$doctor_hospital}','{$doctor_contactnum}','n',{$doctor_licenseno});";		
 		
-				$result = mysqli_query($conn,$query); 		
+				$result = mysqli_query($conn,$docinsert); 		
 				if (!$result) { 
-					echo "Problem with query " . $query . "<br/>"; 
+					echo "Problem with query " . $docinsert . "<br/>"; 
+					echo mysqli_error($conn);
 					//echo pg_last_error(); 
 					exit(); 
 				} 
 				else{
-					echo "Patient successfully added. . Thank you. <br/>";
+					echo "Doctor successfully added. . Thank you. <br/>";
 					}
 			
 	}
