@@ -58,7 +58,7 @@
 				exit;
 			}
 			else{
-				echo "Account still pending";
+				echo "Account Deleted, Please Contact administrator";
 			}
 		}else if($d!=0){
 			$result = mysqli_query($conn,"select doctor_deleted from doctor where doctor_username='{$username}'");

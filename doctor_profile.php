@@ -1,6 +1,6 @@
   <?php
-	// require "dbconnect.php";
-	include('notification.php');
+	require "dbconnect.php";
+	// include('notification.php');
 	// session_start();
 	if ($_SESSION['login']==0)
 		header('Location: index.php');
@@ -98,7 +98,7 @@ function editProfileP(){
 				</div>
 	</div>
 	
-	<div class="content_wrapper">
+	<div class="content_wrapper" style="margin-top: 50px;">
 		<div class="content_main">
 		
 <?php
@@ -110,25 +110,77 @@ function editProfileP(){
 	 //    mysqli_select_db("healthcare",$conn) or die("can not select database");
 		
 		$username=$_SESSION["username"];
-		$resultCheck = mysqli_query($conn,"select * from doctor where doctor_username = '".$username."';");
-
+		$resultCheck = mysqli_query($conn,"select doctor_email,contactno,doctor_licenseno,doctor_fname,doctor_lname,doctor_mname,s.name as sname, h.name as hname from doctor d, specializationinfo s,hospitalinfo h where d.doctor_specialization=s.specializationid and h.hospitalid=d.doctor_hospital and doctor_username = '".$username."';") or die(mysqli_error($conn));
+		$resultweekd=mysqli_query($conn,"select * from availability_weekday where doctor_username='".$username."' order by time");
+		$resultsat=mysqli_query($conn,"select * from availability_saturday where doctor_username='".$username."'");
+		$resultsun=mysqli_query($conn,"select * from availability_sunday where doctor_username='".$username."'");
 		$rows = mysqli_num_rows($resultCheck);
 		
-		for($j=0; $j<$rows; $j++){
+		// for($j=0; $j<$rows; $j++){
 			$tuple = mysqli_fetch_array($resultCheck);		 
+			
 			echo 'NAME: ', $tuple['doctor_lname'],', ', $tuple['doctor_fname'] ,' ', $tuple['doctor_mname'], '<br />';	
-				
-				
-			echo 'SPECIALIZATIONATION: ', $tuple['doctor_specialization'], '<br />';	
-			echo 'HOSPITAL: ', $tuple['doctor_hospital'], '<br />';	
-			echo 'RSTATUS: ', $tuple['doctor_rstatus'], '<br />';	
+			echo 'SPECIALIZATIONATION: ', $tuple['sname'], '<br />';	
+			echo 'HOSPITAL: ', $tuple['hname'], '<br />';		
 			echo 'LICENSE NO: ', $tuple['doctor_licenseno'], '<br />';	
-			echo 'SCHEDULE WEEKDAY ', $tuple['doctor_sched_wday'], '<br />';	
-			echo 'SCHEDULE SATURDAY ', $tuple['doctor_sched_sat'], '<br />';
-			echo 'SCHEDULE SUNDAY ', $tuple['doctor_sched_sun'], '<br />';
+			echo 'SCHEDULE WEEKDAY: ';
+			$i=0;
+			while($rws=mysqli_fetch_array($resultweekd))
+			{
+				$tmw=$rws['time'];
+
+				$timew[$i]= date("H:i ", strtotime($tmw));
+				$i++;
+
+				// echo $rws['time'].", ";
+			}	
+			
+
+			sort($timew);
+
+			// print_r($time);
+			echo date("h:i a", strtotime($timew[0]))." To ".date("h:i a", strtotime($timew[sizeof($timew)-1]))."<br/>";
+			echo 'SCHEDULE SATURDAY :';
+			$i=0;
+			while($rws=mysqli_fetch_array($resultsat))
+			{
+				$tmsat=$rws['time'];
+
+				$timesat[$i]= date("H:i ", strtotime($tmsat));
+				$i++;
+
+				// echo $rws['time'].", ";
+			}	
+			
+
+			sort($timesat);
+
+			// print_r($time);
+			echo date("h:i a", strtotime($timesat[0]))." To ".date("h:i a", strtotime($timesat[sizeof($timesat)-1]))."<br/>";
+			
+			echo 'SCHEDULE SUNDAY :';
+			$i=0;
+			while($rws=mysqli_fetch_array($resultsun))
+			{
+				$tms=$rws['time'];
+
+				$times[$i]= date("H:i ", strtotime($tms));
+				$i++;
+
+				// echo $rws['time'].", ";
+			}	
+			
+
+			sort($times);
+
+			// print_r($time);
+			echo date("h:i a", strtotime($times[0]))." To ".date("h:i a", strtotime($times[sizeof($times)-1]))."<br/>";
+			
 			echo 'EMAIL ADDRESS:', $tuple['doctor_email'], '<br />';	
 			echo 'CONTACT NUMBER:', $tuple['contactno'], '<br />';	
-		}
+
+			
+		
 		?>
 		<br/>
 		

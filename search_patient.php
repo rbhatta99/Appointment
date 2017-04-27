@@ -76,14 +76,14 @@ require "dbconnect.php";
 			//for($i=0; $i<10; $i++){
 				//searching for column name
 				if($sType == 'Specialty'){
-				$resultCheck = mysqli_query($conn, "select doctor_username,doctor_fname,doctor_lname,doctor_mname,s.Name as sname,h.Name as hname from doctor d,specializationinfo s,hospitalinfo h where d.doctor_specialization=SpecializationID and h.HospitalID=doctor_hospital and  ".$field." like '%".$sInput."%' ") or die(mysqli_error($conn));
+				$resultCheck = mysqli_query($conn, "select doctor_username,doctor_fname,doctor_lname,doctor_mname,s.Name as sname,h.Name as hname from doctor d,specializationinfo s,hospitalinfo h where d.doctor_specialization=SpecializationID and h.HospitalID=doctor_hospital and  ".$field." like '%".$sInput."%' and doctor_deleted='n' ") or die(mysqli_error($conn));
 				// echo $resultCheck;
 					// break;
 				}else if($sType == 'Name'){
-					$resultCheck = mysqli_query($conn, "select doctor_username,doctor_fname,doctor_lname,doctor_mname,s.name as sname,h.name as hname from doctor d,specializationinfo s,hospitalinfo h where d.doctor_specialization=SpecializationID and h.HospitalID=doctor_hospital and doctor_lname like '%".$sInput."%' or doctor_fname like '%".$sInput."%' or doctor_mname like '%".$sInput."%'");
+					$resultCheck = mysqli_query($conn, "select doctor_username,doctor_fname,doctor_lname,doctor_mname,s.name as sname,h.name as hname from doctor d,specializationinfo s,hospitalinfo h where d.doctor_specialization=SpecializationID and h.HospitalID=doctor_hospital and doctor_lname like '%".$sInput."%' or doctor_fname like '%".$sInput."%' or doctor_mname like '%".$sInput."%' and doctor_deleted='n'");
 					// break;
 				}else if($sType == 'Hospital'){
-					$resultCheck = mysqli_query($conn, "select doctor_username,doctor_fname,doctor_lname,doctor_mname,s.Name as sname,h.Name as hname from doctor d,specializationinfo s,hospitalinfo h where d.doctor_specialization=SpecializationID and h.HospitalID=doctor_hospital and ".$field." like '%".$sInput."%' ") or die(mysqli_error($conn));
+					$resultCheck = mysqli_query($conn, "select doctor_username,doctor_fname,doctor_lname,doctor_mname,s.Name as sname,h.Name as hname from doctor d,specializationinfo s,hospitalinfo h where d.doctor_specialization=SpecializationID and h.HospitalID=doctor_hospital and ".$field." like '%".$sInput."%' and doctor_deleted='n'") or die(mysqli_error($conn));
 					// break;
 				}
 			

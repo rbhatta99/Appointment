@@ -139,7 +139,7 @@ require "dbconnect.php"
 					exit(); 
 				} 
 				else{
-					echo "Patient successfully added. . Thank you. <br/>";
+					echo "Patient successfully added. Thank you. <br/>";
 					}
 			
 	}

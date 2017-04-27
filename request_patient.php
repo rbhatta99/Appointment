@@ -49,13 +49,13 @@
 				//$conn=mysqli_connect("localhost","root","root")or die("can not connect");
 	            //mysqli_select_db("healthcare",$conn) or die("can not select database");
 				
-				$query = 'SELECT doctor_username, doctor_lname, doctor_fname, doctor_mname, doctor_specialization FROM doctor ORDER BY doctor_lname';
+				$query = 'SELECT doctor_username, doctor_lname, doctor_fname, doctor_mname, s.name as sname FROM doctor d,specializationinfo s where s.specializationid=d.doctor_specialization and doctor_deleted="n" ORDER BY doctor_lname';
 
 				$result = mysqli_query($conn,$query);
 				echo '<form action="request_page_date.php" method="post">
 						<table class="table_doctors">
 						<tr>
-						    <th>Doctor</th>  
+						    
 							<th>Name</th>
 							<th>Specialization</th>
 							<th>Request</th>
@@ -69,13 +69,13 @@
                 $doctor_names=$row['doctor_fname'].' '.$row['doctor_lname'];
 				
 
-                $a="doctor_img/" .$doctor_names.'.'."jpg"; 
+                // $a="doctor_img/" .$doctor_names.'.'."jpg"; 
 
 				$doctor_user = $row['doctor_username'];
 				
 			//	echo $doctor_user;
 				
-				$doctor_special = $row['doctor_specialization'];
+				$doctor_special = $row['sname'];
                 /*       */				
 
                 echo '<input type="hidden" name="doctor_user" value="'.$doctor_user.'">';
@@ -107,8 +107,6 @@
 					}
 					*/
 					echo '<tr>
-					
-					        <td style="width: 85px;height:85px"><img src="'.$a.'" style="width:100%;height:100%;"></td>
 							<td style="width: 250px">' . $doctor_names . '</td>
 							<td style="width: 250px">' . $doctor_special . '</td>
 							<td style="width: 250px"><center><input style="width: 100px" type="submit" value="Request"/></center></td>

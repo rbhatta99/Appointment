@@ -1,6 +1,6 @@
 <?php
-	// require "dbconnect.php";
-	include('notification.php');
+	require "dbconnect.php";
+	// include('notification.php');
 	// session_start();
 	if ($_SESSION['login']==0)
 		header('Location: index.php');
@@ -15,7 +15,7 @@
 		
 	
 	
-</head>
+</head>	
 
 <script type="text/javascript">
 		function editProfileP(){
