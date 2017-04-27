@@ -127,14 +127,15 @@ require "dbconnect.php"
 	}
 	// echo $a;
 	if ($a==0){
-		$query = "insert into patient (patient_id,patient_username, patient_password, patient_eadd, patient_lname, patient_fname, patient_mname, patient_sickness, patient_age, patient_birthdate, patient_gender, patient_height, patient_weight, patient_status, patient_address, patient_contactno, patient_rstatus) values
+		$query = "insert into patient (patient_id,patient_username, patient_password, patient_eadd, patient_lname, patient_fname, patient_mname, patient_sickness, patient_age, patient_birthdate, patient_gender, patient_height, patient_weight, patient_status, patient_address, patient_contactno, patient_deleted) values
 			('{$patientid}','{$patient_username}','{$patient_password}','{$patient_eadd}','{$patient_lname}','{$patient_fname}','{$patient_mname}','{$patient_sickness}','{$patient_age}',
-			'{$patient_bdate}','{$patient_gender}','{$patient_height}','{$patient_weight}','{$patient_status}','{$patient_address}','{$patient_contactnum}','{$patient_rstatus}');";		
+			'{$patient_bdate}','{$patient_gender}','{$patient_height}','{$patient_weight}','{$patient_status}','{$patient_address}','{$patient_contactnum}','n');";		
 		
 				$result = mysqli_query($conn,$query); 		
 				if (!$result) { 
-					echo "Problem with query " . $query . "<br/>"; 
-					//echo pg_last_error(); 
+					echo "Problem with query " . $query . "<br/>";
+
+					echo mysqli_error($conn); 
 					exit(); 
 				} 
 				else{

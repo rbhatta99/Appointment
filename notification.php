@@ -1,5 +1,5 @@
 <?php
-	require "dbconnect.php";
+	// require "dbconnect.php";
 	function send_notification($user,$receiver,$notif_type)
 	{		
 		//$conn = pg_connect('host=localhost dbname=healthcare user=postgres password=user');
