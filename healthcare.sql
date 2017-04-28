@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2017 at 12:32 AM
+-- Generation Time: Apr 28, 2017 at 05:50 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -44,10 +44,9 @@ CREATE TABLE `appointment` (
 --
 
 INSERT INTO `appointment` (`app_patient_id`, `app_date`, `app_time`, `app_doctorusername`, `app_patientusername`, `app_number`, `app_patientname`, `app_doctorname`, `app_hospital`, `app_status`) VALUES
-(360267, '2017-04-24', '8:30AM', 'dileep', 'akhil', 1, 'akhil  shah', 'b, dileep', 'Choondal', 'Approved'),
-(817909, '2017-05-02', '8:30AM', 'dileep', 'Rohit', 2, 'Rohit K Bhattacharjee', 'b, dileep', 'Choondal', 'Approved'),
-(1435, '2017-05-02', '9:30AM', 'dileep', 'Rohitb', 3, 'Rohit k Bhattacharjee', 'b, dileep', 'Choondal', 'Approved'),
-(817909, '2017-04-27', '1pm', 'vipina', 'Rohit', 4, 'Rohit K Bhattacharjee', 'Arora, Vipin', '1', 'Approved');
+(817909, '2017-04-27', '1pm', 'vipina', 'Rohit', 4, 'Rohit K Bhattacharjee', 'Arora, Vipin', '1', 'Approved'),
+(817909, '2017-05-17', '2:30pm', 'Farheen', 'Rohit', 7, 'Rohit G Bhattacharjee', 'Farheen, A', '17', 'Approved'),
+(817909, '2017-04-29', '10:30am', 'SaifAliKhan', 'Rohit', 8, 'Rohit G Bhattacharjee', 'saif, saifaikhan', '41', 'Approved');
 
 -- --------------------------------------------------------
 
@@ -65,6 +64,51 @@ CREATE TABLE `availability_saturday` (
 --
 
 INSERT INTO `availability_saturday` (`doctor_username`, `time`) VALUES
+('Farheen', '10:30am'),
+('Farheen', '10am'),
+('Farheen', '11:30am'),
+('Farheen', '11am'),
+('Farheen', '12:30pm'),
+('Farheen', '12pm'),
+('Farheen', '1:30pm'),
+('Farheen', '1pm'),
+('Farheen', '2:30pm'),
+('Farheen', '2pm'),
+('Farheen', '3pm'),
+('Farheen', '9:30am'),
+('JohnH', '12:30pm'),
+('JohnH', '12pm'),
+('JohnH', '1:30pm'),
+('JohnH', '1pm'),
+('JohnH', '2:30pm'),
+('JohnH', '2pm'),
+('JohnH', '3:30pm'),
+('JohnH', '3pm'),
+('JohnH', '4pm'),
+('SaifAliKhan', '10:30am'),
+('SaifAliKhan', '10am'),
+('SaifAliKhan', '11:30am'),
+('SaifAliKhan', '11am'),
+('SaifAliKhan', '12pm'),
+('SaifAliKhan', '9:30am'),
+('sanjayleela', '10:30am'),
+('sanjayleela', '10am'),
+('sanjayleela', '11:30am'),
+('sanjayleela', '11am'),
+('sanjayleela', '12:30pm'),
+('sanjayleela', '12pm'),
+('sanjayleela', '1:30pm'),
+('sanjayleela', '1pm'),
+('sanjayleela', '9:30am'),
+('sanjeevb', '12:30pm'),
+('sanjeevb', '12pm'),
+('sanjeevb', '1:30pm'),
+('sanjeevb', '1pm'),
+('sanjeevb', '2:30pm'),
+('sanjeevb', '2pm'),
+('sanjeevb', '3:30pm'),
+('sanjeevb', '3pm'),
+('sanjeevb', '4pm'),
 ('vipina', '12:30pm'),
 ('vipina', '12pm'),
 ('vipina', '1:30pm'),
@@ -83,7 +127,7 @@ INSERT INTO `availability_saturday` (`doctor_username`, `time`) VALUES
 
 CREATE TABLE `availability_sunday` (
   `doctor_username` varchar(100) NOT NULL,
-  `time` varchar(6) NOT NULL
+  `time` varchar(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -91,6 +135,37 @@ CREATE TABLE `availability_sunday` (
 --
 
 INSERT INTO `availability_sunday` (`doctor_username`, `time`) VALUES
+('Farheen', '10:30am'),
+('Farheen', '10am'),
+('Farheen', '11:30am'),
+('Farheen', '11am'),
+('Farheen', '12:30pm'),
+('Farheen', '12pm'),
+('Farheen', '1pm'),
+('Farheen', '9:30am'),
+('JohnH', '3:30pm'),
+('JohnH', '3pm'),
+('JohnH', '4pm'),
+('SaifAliKhan', '10:30am'),
+('SaifAliKhan', '10am'),
+('SaifAliKhan', '11:30am'),
+('SaifAliKhan', '11am'),
+('SaifAliKhan', '12pm'),
+('SaifAliKhan', '9:30am'),
+('sanjayleela', '10:30am'),
+('sanjayleela', '10am'),
+('sanjayleela', '11:30am'),
+('sanjayleela', '11am'),
+('sanjayleela', '12:30pm'),
+('sanjayleela', '12pm'),
+('sanjayleela', '1:30pm'),
+('sanjayleela', '1pm'),
+('sanjayleela', '9:30am'),
+('sanjeevb', '12:30p'),
+('sanjeevb', '12pm'),
+('sanjeevb', '1:30pm'),
+('sanjeevb', '1pm'),
+('sanjeevb', '2pm'),
 ('vipina', '2:30pm'),
 ('vipina', '2pm'),
 ('vipina', '3:30pm'),
@@ -113,6 +188,106 @@ CREATE TABLE `availability_weekday` (
 --
 
 INSERT INTO `availability_weekday` (`doctor_username`, `time`) VALUES
+('Farheen', '10:30am'),
+('Farheen', '10am'),
+('Farheen', '11:30am'),
+('Farheen', '11am'),
+('Farheen', '12:30pm'),
+('Farheen', '12pm'),
+('Farheen', '1:30pm'),
+('Farheen', '1pm'),
+('Farheen', '2:30pm'),
+('Farheen', '2pm'),
+('Farheen', '3:30pm'),
+('Farheen', '3pm'),
+('Farheen', '4:30pm'),
+('Farheen', '4pm'),
+('Farheen', '5:30pm'),
+('Farheen', '5pm'),
+('Farheen', '6:30pm'),
+('Farheen', '6pm'),
+('Farheen', '7pm'),
+('Farheen', '9:30am'),
+('JohnH', '10:30am'),
+('JohnH', '10am'),
+('JohnH', '11:30am'),
+('JohnH', '11am'),
+('JohnH', '12:30pm'),
+('JohnH', '12pm'),
+('JohnH', '1:30pm'),
+('JohnH', '1pm'),
+('JohnH', '2:30pm'),
+('JohnH', '2pm'),
+('JohnH', '3:30pm'),
+('JohnH', '3pm'),
+('JohnH', '4:30pm'),
+('JohnH', '4pm'),
+('JohnH', '5:30pm'),
+('JohnH', '5pm'),
+('JohnH', '6:30pm'),
+('JohnH', '6pm'),
+('JohnH', '7:30pm'),
+('JohnH', '7pm'),
+('JohnH', '8:30pm'),
+('JohnH', '8pm'),
+('JohnH', '9:30am'),
+('JohnH', '9pm'),
+('SaifAliKhan', '10:30am'),
+('SaifAliKhan', '10am'),
+('SaifAliKhan', '11:30am'),
+('SaifAliKhan', '11am'),
+('SaifAliKhan', '12:30pm'),
+('SaifAliKhan', '12pm'),
+('SaifAliKhan', '1:30pm'),
+('SaifAliKhan', '1pm'),
+('SaifAliKhan', '2:30pm'),
+('SaifAliKhan', '2pm'),
+('SaifAliKhan', '3:30pm'),
+('SaifAliKhan', '3pm'),
+('SaifAliKhan', '4:30pm'),
+('SaifAliKhan', '4pm'),
+('SaifAliKhan', '5pm'),
+('SaifAliKhan', '9:30am'),
+('sanjayleela', '10:30am'),
+('sanjayleela', '10am'),
+('sanjayleela', '11:30am'),
+('sanjayleela', '11am'),
+('sanjayleela', '12:30pm'),
+('sanjayleela', '12pm'),
+('sanjayleela', '1:30pm'),
+('sanjayleela', '1pm'),
+('sanjayleela', '2:30pm'),
+('sanjayleela', '2pm'),
+('sanjayleela', '3:30pm'),
+('sanjayleela', '3pm'),
+('sanjayleela', '4:30pm'),
+('sanjayleela', '4pm'),
+('sanjayleela', '5:30pm'),
+('sanjayleela', '5pm'),
+('sanjayleela', '6:30pm'),
+('sanjayleela', '6pm'),
+('sanjayleela', '9:30am'),
+('sanjeevb', '10:30am'),
+('sanjeevb', '10am'),
+('sanjeevb', '11:30am'),
+('sanjeevb', '11am'),
+('sanjeevb', '12:30pm'),
+('sanjeevb', '12pm'),
+('sanjeevb', '1:30pm'),
+('sanjeevb', '1pm'),
+('sanjeevb', '2:30pm'),
+('sanjeevb', '2pm'),
+('sanjeevb', '3:30pm'),
+('sanjeevb', '3pm'),
+('sanjeevb', '4:30pm'),
+('sanjeevb', '4pm'),
+('sanjeevb', '5:30pm'),
+('sanjeevb', '5pm'),
+('sanjeevb', '6:30pm'),
+('sanjeevb', '6pm'),
+('sanjeevb', '7:30pm'),
+('sanjeevb', '7pm'),
+('sanjeevb', '8pm'),
 ('vipina', '10:30am'),
 ('vipina', '10am'),
 ('vipina', '11:30am'),
@@ -140,51 +315,6 @@ INSERT INTO `availability_weekday` (`doctor_username`, `time`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `degreeinfo`
---
-
-CREATE TABLE `degreeinfo` (
-  `DegreeName` varchar(8) NOT NULL,
-  `Description` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `degreeinfo`
---
-
-INSERT INTO `degreeinfo` (`DegreeName`, `Description`) VALUES
-('BMBS', 'Bachelor of Medicine, Bachelor of Surgery'),
-('ChM', 'Master of Surgery'),
-('CM', 'Master of Surgery'),
-('DClinSur', 'Doctor of Clinical Surgery'),
-('DCM', 'Doctor of Clinical Medicine'),
-('DM', 'Doctorate in Medicine'),
-('DMedSc', 'Doctor of Medical Science'),
-('DMSc', 'Doctor of Medical Science'),
-('DO', 'Doctor of Osteopathic Medicine'),
-('DPhil', 'Doctor of Philosophy'),
-('DS', 'Doctor of Surgery'),
-('DSurg', 'Doctor of Surgery'),
-('MBBCh', 'Bachelor of Medicine, Bachelor of Surgery'),
-('MBBS', 'Bachelor of Medicine, Bachelor of Surgery'),
-('MBChB', 'Bachelor of Medicine, Bachelor of Surgery'),
-('MCh', 'Master of Surgery'),
-('MChir', 'Master of Surgery'),
-('MCM', 'Master of Clinical Medicine'),
-('MD', 'Doctor of medicine'),
-('MM', 'Master of Medicine'),
-('MMed', 'Master of Medicine'),
-('MMedSc', 'Master of Medical Science'),
-('MMSc', 'Master of Medical Science'),
-('MPhil', 'Master of Philosophy'),
-('MS', 'Master of Surgery'),
-('MSc', 'Master of Science in Medicine or Surgery'),
-('MSurg', 'Master of Surgery'),
-('PhD', 'Doctor of Philosophy');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `doctor`
 --
 
@@ -207,18 +337,12 @@ CREATE TABLE `doctor` (
 --
 
 INSERT INTO `doctor` (`doctor_username`, `doctor_password`, `doctor_email`, `doctor_lname`, `doctor_fname`, `doctor_mname`, `doctor_specialization`, `doctor_hospital`, `contactno`, `doctor_deleted`, `doctor_licenseno`) VALUES
-('vipina', 'd01a1afce4514f8b0f4ade054181a1bb', 'vipin@gmail.com', 'Arora', 'Vipin', '', 1, 1, '9724087894', 'n', 123456);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `doctorspecialization`
---
-
-CREATE TABLE `doctorspecialization` (
-  `doctor_username` varchar(100) NOT NULL,
-  `SpecializationID` int(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+('Farheen', '79cfeb94595de33b3326c06ab1c7dbda', 'farheen@gmail.com', 'Farheen', 'A', '', 34, 17, '9724087894', 'n', 345678),
+('JohnH', 'e99a18c428cb38d5f260853678922e03', 'john123@gmail.com', 'Hancock', 'John', '', 4, 22, '5687951234', 'y', 564285),
+('SaifAliKhan', 'e99a18c428cb38d5f260853678922e03', 'saif@gmail.com', 'saif', 'saifaikhan', '', 10, 41, '1548647963', 'n', 345679),
+('sanjayleela', 'e99a18c428cb38d5f260853678922e03', 'sanjay@gmail.com', 'sanjayleela', 'sanjayleela', '', 6, 12, '1548647963', 'n', 123457),
+('sanjeevb', '3042c5e85752ec688acf999fbfc3568d', 'sanjeevbala@gmail.com', 'Bala', 'Sanjeev', '', 44, 33, '1548647963', 'n', 56543),
+('vipina', 'd01a1afce4514f8b0f4ade054181a1bb', 'vipin@gmail.com', 'Arora', 'Vipin', '', 1, 1, '9724087894', 'y', 123456);
 
 -- --------------------------------------------------------
 
@@ -323,19 +447,6 @@ INSERT INTO `hospitalinfo` (`HospitalID`, `Name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `notification_system`
---
-
-CREATE TABLE `notification_system` (
-  `notif_no` int(11) NOT NULL,
-  `sender` varchar(50) DEFAULT NULL,
-  `receiver` varchar(50) DEFAULT NULL,
-  `notif_type` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `patient`
 --
 
@@ -366,30 +477,8 @@ CREATE TABLE `patient` (
 INSERT INTO `patient` (`patient_id`, `patient_username`, `patient_password`, `patient_eadd`, `patient_lname`, `patient_fname`, `patient_mname`, `patient_sickness`, `patient_age`, `patient_birthdate`, `patient_gender`, `patient_height`, `patient_weight`, `patient_status`, `patient_address`, `patient_contactno`, `patient_deleted`) VALUES
 (1435, 'Rohitb', '0b6cf9be8f90c78560c6bc929a494feb', 'rohitb@gmail.com', 'Bhattacharjee', 'Rohit', 'k', 'cold', 25, '1991-09-09', 'male', 5, 555, 'single', '800 West Renner Road', '4698315834', 'n'),
 (360267, 'akhil', '5f4dcc3b5aa765d61d8327deb882cf99', 'pearlzmasters@gmail.com', 'shah', 'akhil', 'M', 'Fever', 24, '1989-10-11', 'male', 180, 55, 'single', 'Thrissur,680501', '4698315834', 'n'),
-(817909, 'Rohit', '0b6cf9be8f90c78560c6bc929a494feb', 'rohitb@gmail.com', 'Bhattacharjee', 'Rohit', 'K', 'Fever', 24, '1992-09-09', 'male', 5, 128, 'single', 'Kolkata', '4698315834', 'n');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `records`
---
-
-CREATE TABLE `records` (
-  `patient_id` int(15) NOT NULL,
-  `dates` date NOT NULL,
-  `patientname` varchar(50) NOT NULL,
-  `sickness` varchar(50) NOT NULL,
-  `doctorname` varchar(50) NOT NULL,
-  `casereport` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `records`
---
-
-INSERT INTO `records` (`patient_id`, `dates`, `patientname`, `sickness`, `doctorname`, `casereport`) VALUES
-(360267, '2013-10-24', 'akhil  shah', 'fever', 'dileep', 'fever with cold'),
-(360267, '2013-10-22', 'akhil  shah', 'cold', 'dileep', 'cold with fever');
+(476691, 'rohitbhatta99', '0b6cf9be8f90c78560c6bc929a494feb', 'rohit.bhattacharjee99@gmail.com', 'Bhattacharjee', 'Rohit', 'M', 'Cold', 27, '1991-09-09', 'male', 185, 87, 'single', 'Kolkata', '9836448639', 'n'),
+(817909, 'Rohit', '0b6cf9be8f90c78560c6bc929a494feb', 'rohitb@gmail.com', 'Bhattacharjee', 'Rohit', 'G', 'Fever', 24, '1992-09-09', 'male', 185, 128, 'single', 'Kolkata', '4698315834', 'n');
 
 -- --------------------------------------------------------
 
@@ -492,25 +581,12 @@ ALTER TABLE `availability_weekday`
   ADD PRIMARY KEY (`doctor_username`,`time`);
 
 --
--- Indexes for table `degreeinfo`
---
-ALTER TABLE `degreeinfo`
-  ADD PRIMARY KEY (`DegreeName`);
-
---
 -- Indexes for table `doctor`
 --
 ALTER TABLE `doctor`
   ADD PRIMARY KEY (`doctor_username`),
   ADD KEY `FK_Hospital` (`doctor_hospital`),
   ADD KEY `doctor_specialization` (`doctor_specialization`);
-
---
--- Indexes for table `doctorspecialization`
---
-ALTER TABLE `doctorspecialization`
-  ADD PRIMARY KEY (`doctor_username`,`SpecializationID`),
-  ADD KEY `FK_SPECIAL` (`SpecializationID`);
 
 --
 -- Indexes for table `hospitalinfo`
@@ -567,13 +643,6 @@ ALTER TABLE `availability_weekday`
 ALTER TABLE `doctor`
   ADD CONSTRAINT `FK_Hospital` FOREIGN KEY (`doctor_hospital`) REFERENCES `hospitalinfo` (`HospitalID`),
   ADD CONSTRAINT `doctor_ibfk_1` FOREIGN KEY (`doctor_specialization`) REFERENCES `specializationinfo` (`SpecializationID`);
-
---
--- Constraints for table `doctorspecialization`
---
-ALTER TABLE `doctorspecialization`
-  ADD CONSTRAINT `FK_SPECIAL` FOREIGN KEY (`SpecializationID`) REFERENCES `specializationinfo` (`SpecializationID`),
-  ADD CONSTRAINT `doctorspecialization_ibfk_1` FOREIGN KEY (`doctor_username`) REFERENCES `doctor` (`doctor_username`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
