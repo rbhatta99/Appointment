@@ -71,7 +71,7 @@ require "dbconnect.php";
 				echo"</table>";
 
 				if(mysqli_num_rows($result4)>0){
-				echo "<h1>LIST OF PATIENTS</h1>";
+				echo "<h1>LIST OF Deleted Doctors</h1>";
 				echo "<table class='table_patients'>";
 				echo "<tr class='table_patients_row'><td><b>Username</b></td><td><b>Email Add</b></td><td><b>Lastname</b></td><td><b>First Name</b></td><td><b>Middle Name</b></td><td span='2'><b>Action</b></td></tr>";
 				while($myrow2 = mysqli_fetch_array($result4)){

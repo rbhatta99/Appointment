@@ -41,7 +41,7 @@
 	   //          mysql_select_db("healthcare",$conn) or die("can not select database");
 
 				$username = $_SESSION['username'];
-				$query = "SELECT app_patientname, app_number, app_date, app_time, app_doctorname, app_hospital, app_status FROM appointment WHERE app_doctorusername='$username' ORDER BY app_date";
+				$query = "SELECT app_doctorname, app_number, app_date, app_time,app_patientname, h.name as hname, app_status FROM appointment a,hospitalinfo h WHERE h.hospitalID=app_hospital and app_doctorusername='$username' ORDER BY app_date";
 
 				$result = mysqli_query($conn,$query);
 
@@ -50,7 +50,7 @@
 							<th>App #</th>
 							<th>Date</th>
 							<th>Time</th>
-							<th>Doctor</th>
+							<th>Patient Name</th>
 							<th>Hospital</th>
 							<th>Status</th>
 							<th>Manage</th>
@@ -64,7 +64,7 @@
 					for ($datacounter=0; $datacounter<$count; $datacounter++) {
 						$c_row = current($row);
 						if($datacounter > 0) {
-							echo '<td>' . $c_row . '</td>';
+							echo '<td style="width:150px;text-align:center;">' . $c_row . '</td>';
 						}
 						if($datacounter == 1) {
 							$tableID = $c_row;

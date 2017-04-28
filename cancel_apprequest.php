@@ -58,4 +58,5 @@
 	$delete_result = mysqli_query($conn,$delete_query);
 
 	mysqli_close($conn);
+	header('Location: ' . $_SERVER['HTTP_REFERER']);
 ?>

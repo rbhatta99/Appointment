@@ -6,11 +6,11 @@
 	
 	if( (isset($_GET['id'])) && (isset($_GET['action'])) ){
 		if($_GET['action'] == "delete"){
-			$query1="update doctor set (doctor_deleted)=('y') where doctor_username='{$_GET['id']}';";
-			$result1 = mysqli_query($conn,$query1);
+			$query1="update doctor set doctor_deleted='y' where doctor_username='{$_GET['id']}';";
+			$result1 = mysqli_query($conn,$query1) or die(mysqli_error($conn));
 		}
 		if($_GET['action'] == "undelete"){
-			$query2="update doctor set (doctor_deleted)=('n') where doctor_username='{$_GET['id']}';";
+			$query2="update doctor set doctor_deleted='n' where doctor_username='{$_GET['id']}';";
 			$result2 = mysqli_query($conn,$query2);
 		}
 		mysqli_close($conn);

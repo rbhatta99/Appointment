@@ -18,7 +18,7 @@ require "dbconnect.php";
 		}
 	}		
 </script>
-<title>Health Care System</title>
+<title>Appointment System</title>
 </head>
 
 <body>
@@ -109,7 +109,7 @@ require "dbconnect.php";
 					</div>
 					<div class="footer">
 						<ul>
-							<li style="font-family:arial;color:white;font-size:12px;"> Copyright-2013@Spiderguts.com</li>
+							<li style="font-family:arial;color:white;font-size:12px;">Created by: Rohit, Sanjana, Farheen</li>
 						</ul>
 					</div>
 					

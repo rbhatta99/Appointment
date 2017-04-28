@@ -87,8 +87,8 @@ function editProfileP(){
 			<div id="menu_wrapper">
 				<ul class = "main_menu_left">
 					<li><a class="top_menu" href = "dboardPatient.php">Dashboard</a></li>
-					<li><a class="top_menu" href = "patient_profile.php">Profile</a></li>
-					<li><a class="top_menu" href = "appointments_patient.php">Appointment</a></li>
+					<li><a class="top_menu" href = "doctor_profile.php">Profile</a></li>
+					<li><a class="top_menu" href = "appointments_doctor.php">Appointment</a></li>
 					<!--li><a class="top_menu" href = "#">Settings</a></li-->
 				</ul>
 				<ul class = "main_menu_right">
